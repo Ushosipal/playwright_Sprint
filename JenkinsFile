@@ -8,16 +8,18 @@ pipeline {
             }
         }
 
-        stage('Install Browsers') {
-            steps {
-                bat 'npx playwright install'
-            }
-        }
-
         stage('Run Tests') {
             steps {
                 bat 'npx playwright test --workers=1'
             }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'test-results/**/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'playwright-report/**/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'allure-results/**/*', allowEmptyArchive: true
         }
     }
 }
