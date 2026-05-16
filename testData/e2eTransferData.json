@@ -1,0 +1,67 @@
+[
+  {
+    "testCaseId": "TC-E2E-01",
+    "scenario": "UI transfer + API before/after balance + transaction history verification",
+    "amount": "100",
+    "isDefect": false,
+    "validateHistory": true,
+    "tags": ["@e2e", "@smoke", "@FR-05", "@FR-06", "@FR-07"]
+  },
+  {
+    "testCaseId": "TC-E2E-02",
+    "scenario": "UI confirmation text matches API success response",
+    "amount": "75",
+    "isDefect": false,
+    "verifyConfirmationText": true,
+    "tags": ["@e2e", "@regression", "@FR-08"]
+  },
+  {
+    "testCaseId": "TC-E2E-03",
+    "scenario": "Minimum boundary (0.01) UI transfer + API balance verification",
+    "amount": "0.01",
+    "isDefect": false,
+    "tags": ["@e2e", "@regression", "@FR-05", "@FR-06"]
+  },
+  {
+    "testCaseId": "TC-E2E-04",
+    "scenario": "Insufficient-funds UI + API state verification (DEF-004)",
+    "amount": "999999",
+    "isDefect": true,
+    "defectId": "DEF-004",
+    "tags": ["@e2e", "@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-E2E-05",
+    "scenario": "Same-account transfer UI + API state verification (DEF-001)",
+    "amount": "50",
+    "isSameAccount": true,
+    "isDefect": true,
+    "defectId": "DEF-001",
+    "tags": ["@e2e", "@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-E2E-06",
+    "scenario": "Three consecutive UI transfers (10, 20, 30) — cumulative balance and history verified via API",
+    "amountArray": ["10", "20", "30"],
+    "expectedCumulativeDeduction": 60,
+    "isDefect": false,
+    "validateHistory": true,
+    "tags": ["@e2e", "@regression", "@FR-06", "@FR-07"]
+  },
+  {
+    "testCaseId": "TC-E2E-07",
+    "scenario": "Invalid amount inputs (0, -50, abc) via UI — API confirms balance state",
+    "invalidAmounts": ["0", "-50", "abc"],
+    "isDefect": true,
+    "defectId": "DEF-002+DEF-003+DEF-005",
+    "tags": ["@e2e", "@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-E2E-08",
+    "scenario": "Full E2E: login → UI transfer → API balance + history verification",
+    "amount": "200",
+    "isDefect": false,
+    "validateHistory": true,
+    "tags": ["@e2e", "@smoke", "@FR-05", "@FR-06", "@FR-07", "@FR-08"]
+  }
+]

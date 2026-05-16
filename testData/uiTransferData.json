@@ -1,0 +1,80 @@
+[
+  {
+    "testCaseId": "TC-UI-01",
+    "scenario": "Successful fund transfer between own accounts",
+    "amount": "100",
+    "isDefect": false,
+    "tags": ["@smoke", "@FR-05"]
+  },
+  {
+    "testCaseId": "TC-UI-02",
+    "scenario": "Confirmation message displays formatted amount and account numbers",
+    "amount": "250",
+    "isDefect": false,
+    "tags": ["@smoke", "@FR-08"]
+  },
+  {
+    "testCaseId": "TC-UI-03",
+    "scenario": "Minimum boundary transfer (0.01) succeeds via UI",
+    "amount": "0.01",
+    "isDefect": false,
+    "tags": ["@regression", "@FR-05"]
+  },
+  {
+    "testCaseId": "TC-UI-04-A",
+    "scenario": "Empty amount field — should be rejected by UI",
+    "amount": "",
+    "isDefect": true,
+    "defectId": "DEF-002-related",
+    "tags": ["@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-UI-04-B",
+    "scenario": "Zero amount transfer accepted by UI (DEF-002)",
+    "amount": "0",
+    "isDefect": true,
+    "defectId": "DEF-002",
+    "tags": ["@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-UI-04-C",
+    "scenario": "Negative amount transfer accepted by UI (DEF-003)",
+    "amount": "-50",
+    "isDefect": true,
+    "defectId": "DEF-003",
+    "tags": ["@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-UI-05-A",
+    "scenario": "Non-numeric '50#' partially accepted by UI (DEF-005)",
+    "amount": "50#",
+    "isDefect": true,
+    "defectId": "DEF-005",
+    "tags": ["@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-UI-05-B",
+    "scenario": "Non-numeric 'abc' should be rejected by UI",
+    "amount": "abc",
+    "isDefect": true,
+    "defectId": "DEF-005-related",
+    "tags": ["@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-UI-06",
+    "scenario": "Insufficient funds — overdraft incorrectly allowed (DEF-004)",
+    "amount": "999999",
+    "isDefect": true,
+    "defectId": "DEF-004",
+    "tags": ["@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-UI-07",
+    "scenario": "Same source and destination account allowed (DEF-001)",
+    "amount": "50",
+    "isSameAccount": true,
+    "isDefect": true,
+    "defectId": "DEF-001",
+    "tags": ["@defects", "@FR-09"]
+  }
+]

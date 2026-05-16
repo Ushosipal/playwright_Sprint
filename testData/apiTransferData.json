@@ -1,0 +1,56 @@
+[
+  {
+    "testCaseId": "TC-API-01",
+    "scenario": "Valid POST /transfer returns HTTP 200",
+    "amount": "100",
+    "expectedStatus": 200,
+    "isDefect": false,
+    "tags": ["@api", "@smoke", "@FR-05", "@FR-06"]
+  },
+  {
+    "testCaseId": "TC-API-02",
+    "scenario": "Source debited and destination credited correctly (exact deltas)",
+    "amount": "100",
+    "expectedStatus": 200,
+    "isDefect": false,
+    "validateBalance": true,
+    "tags": ["@api", "@regression", "@FR-06"]
+  },
+  {
+    "testCaseId": "TC-API-03",
+    "scenario": "Transaction history shows Debit on source and Credit on destination",
+    "amount": "100",
+    "expectedStatus": 200,
+    "isDefect": false,
+    "validateHistory": true,
+    "tags": ["@api", "@regression", "@FR-07"]
+  },
+  {
+    "testCaseId": "TC-API-04",
+    "scenario": "Insufficient funds — API incorrectly returns 200 (DEF-004)",
+    "amount": "999999",
+    "expectedStatus": 200,
+    "isDefect": true,
+    "defectId": "DEF-004",
+    "tags": ["@api", "@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-API-05-A",
+    "scenario": "Negative amount transfer accepted by API (DEF-003)",
+    "amount": "-50",
+    "expectedStatus": 200,
+    "isDefect": true,
+    "defectId": "DEF-003",
+    "tags": ["@api", "@defects", "@FR-09"]
+  },
+  {
+    "testCaseId": "TC-API-05-B",
+    "scenario": "Same-account (from=to) transfer accepted by API (DEF-001)",
+    "amount": "50",
+    "isSameAccount": true,
+    "expectedStatus": 200,
+    "isDefect": true,
+    "defectId": "DEF-001",
+    "tags": ["@api", "@defects", "@FR-09"]
+  }
+]
