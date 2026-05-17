@@ -2,8 +2,7 @@ import { Page, TestInfo } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 
-const SCREENSHOT_DIR = 'test-results/screenshots';
-
+const SCREENSHOT_DIR = path.resolve(process.cwd(), 'test-results', 'screenshots');
 export async function captureScreenshot(
   page: Page,
   testInfo: TestInfo,

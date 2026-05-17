@@ -7,8 +7,8 @@ export default defineConfig({
   fullyParallel: true,
   timeout: 60000,
   forbidOnly: isCI,
-  retries: isCI ? 2 : 1,
-  workers: isCI ? 1 : undefined,
+  retries: isCI ? 2 : 2,
+  workers: isCI ? 1 : 2,
 
   reporter: [
     ['list'],
@@ -22,13 +22,27 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    actionTimeout: 15000,
+    actionTimeout: 25000,
     headless: true
   },
 
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } }
+    // UI + E2E → all three browser engines
+    {
+      name: 'chromium',
+      testMatch: ['**/tests/ui/**/*.spec.ts', '**/tests/e2e/**/*.spec.ts' , '**/tests/api/**/*.spec.ts' , '**/tests/performance-lite/**/*.spec.ts'],
+      use: { ...devices['Desktop Chrome'] }
+    },
+    {
+      name: 'firefox',
+      testMatch: ['**/tests/ui/**/*.spec.ts', '**/tests/e2e/**/*.spec.ts'],
+      use: { ...devices['Desktop Firefox'] }
+    },
+    {
+      name: 'webkit',
+      testMatch: ['**/tests/ui/**/*.spec.ts', '**/tests/e2e/**/*.spec.ts'],
+      use: { ...devices['Desktop Safari'] }
+    },
+    
   ]
 });

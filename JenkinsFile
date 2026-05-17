@@ -1,58 +1,214 @@
+// pipeline {
+//     agent any
+
+//     options {
+//         timeout(time: 45, unit: 'MINUTES')
+//         timestamps()
+//     }
+
+//     environment {
+//         CI = 'true'
+//         NODE_OPTIONS = '--max-old-space-size=4096'
+//     }
+
+//     stages {
+//         stage('Checkout') {
+//             steps {
+//                 checkout scm
+//             }
+//         }
+
+//         stage('Install Dependencies') {
+//             steps {
+//                 bat 'npm ci'
+//                 bat 'npx playwright install'
+//             }
+//         }
+
+//         stage('Run Full Test Suite') {
+//             steps {
+//                 bat 'npx playwright test --workers=1'
+//             }
+//         }
+
+//         stage('Generate Allure Report') {
+//             steps {
+//                 bat 'npx allure generate allure-results --clean -o allure-report'
+//             }
+//         }
+//     }
+
+//     post {
+//         always {
+//             archiveArtifacts artifacts: 'test-results/**/*', allowEmptyArchive: true
+//             archiveArtifacts artifacts: 'playwright-report/**/*', allowEmptyArchive: true
+//             archiveArtifacts artifacts: 'allure-results/**/*', allowEmptyArchive: true
+//             archiveArtifacts artifacts: 'allure-report/**/*', allowEmptyArchive: true
+
+//             publishHTML([
+//                 allowMissing: true,
+//                 alwaysLinkToLastBuild: true,
+//                 keepAll: true,
+//                 reportDir: 'playwright-report',
+//                 reportFiles: 'index.html',
+//                 reportName: 'Playwright Report'
+//             ])
+//         }
+//     }
+// }
+
+
+
 pipeline {
     agent any
 
     options {
         timeout(time: 45, unit: 'MINUTES')
         timestamps()
+        // Prevents two builds sharing the same ParaBank port (9090) simultaneously.
+        disableConcurrentBuilds()
     }
 
     environment {
-        CI = 'true'
+        CI           = 'true'
         NODE_OPTIONS = '--max-old-space-size=4096'
+        // allure-commandline is a local dev-dependency, not a global install.
+        // Adding node_modules\.bin to PATH lets `allure` resolve without npx.
+        PATH         = "${env.PATH};${env.WORKSPACE}\\node_modules\\.bin"
     }
 
     stages {
+
+        // ── 1. Source ────────────────────────────────────────────────────────
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
+        // ── 2. Dependencies ──────────────────────────────────────────────────
         stage('Install Dependencies') {
             steps {
                 bat 'npm ci'
-                bat 'npx playwright install'
+
+                // Install all three browser engines + OS-level system libraries.
+                // Your config runs chromium (all suites), firefox and webkit (UI + E2E),
+                // so all three are needed on the CI agent.
+                // --with-deps installs fonts, codecs and other native libs that are
+                // frequently missing on a fresh Windows agent.
+                bat 'npx playwright install --with-deps'
             }
         }
 
+        // ── 3. Start ParaBank ────────────────────────────────────────────────
+        // baseURL is http://localhost:9090/ — the application must be running
+        // before any test executes or every test fails with ERR_CONNECTION_REFUSED.
+        //
+        // Choose ONE of the options below and uncomment it:
+        //
+        // Option A — Docker (recommended for reproducibility):
+        //   bat 'docker run -d --name parabank -p 9090:8080 parasoft/parabank'
+        //   bat 'timeout /t 20 /nobreak > nul'   ← wait for the app to boot
+        //
+        // Option B — WAR deployed to a local Tomcat Windows service:
+        //   bat 'net start Tomcat9'
+        //   bat 'timeout /t 15 /nobreak > nul'
+        //
+        // Option C — ParaBank is always-on on this Jenkins agent:
+        //   (no step needed — leave the stage as an echo)
+        //
+        stage('Start ParaBank') {
+            steps {
+                echo 'TODO: start ParaBank on port 9090 — see options in Jenkinsfile comments'
+            }
+        }
+
+        // ── 4. Tests ─────────────────────────────────────────────────────────
         stage('Run Full Test Suite') {
             steps {
-                bat 'npx playwright test --workers=1'
+                // catchError continues the pipeline when tests fail so that
+                // reports and artifacts are always published regardless of outcome.
+                catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                    // No --workers flag — playwright.config.ts already sets
+                    // workers: 1 when CI=true, which is the safe ceiling for
+                    // the shared ParaBank demo instance.
+                    //
+                    // No --project flag — all three projects (chromium, firefox,
+                    // webkit) run according to the testMatch rules already defined
+                    // in playwright.config.ts:
+                    //   chromium → ui + e2e + api + performance-lite
+                    //   firefox  → ui + e2e
+                    //   webkit   → ui + e2e
+                    bat 'npx playwright test'
+                }
             }
         }
 
+        // ── 5. Allure Report ─────────────────────────────────────────────────
         stage('Generate Allure Report') {
             steps {
-                bat 'npx allure generate allure-results --clean -o allure-report'
+                // allure is on PATH via the environment block above.
+                // allure-playwright writes results to ./allure-results by default.
+                // --clean removes stale data from any previous build on this workspace.
+                bat 'allure generate allure-results --clean --output allure-report'
             }
         }
     }
 
+    // ── Post ─────────────────────────────────────────────────────────────────
     post {
         always {
-            archiveArtifacts artifacts: 'test-results/**/*', allowEmptyArchive: true
-            archiveArtifacts artifacts: 'playwright-report/**/*', allowEmptyArchive: true
-            archiveArtifacts artifacts: 'allure-results/**/*', allowEmptyArchive: true
-            archiveArtifacts artifacts: 'allure-report/**/*', allowEmptyArchive: true
+            // Publish JUnit XML — this feeds the Jenkins test trend graph and
+            // the "Tests" tab on the build page. Generated by the junit reporter
+            // in playwright.config.ts at test-results/junit.xml.
+            junit(
+                testResults:          'test-results/junit.xml',
+                allowEmptyResults:    true,
+                skipPublishingChecks: true
+            )
 
+            // Archive everything in one call.
+            // Covers: logs, screenshots, videos, traces (test-results/),
+            //         Playwright HTML report (playwright-report/),
+            //         raw Allure data (allure-results/),
+            //         built Allure site (allure-report/).
+            archiveArtifacts(
+                artifacts:        'test-results/**/*,playwright-report/**/*,allure-results/**/*,allure-report/**/*',
+                allowEmptyArchive: true
+            )
+
+            // Playwright HTML report — served inline from Jenkins.
+            // Requires the "HTML Publisher" Jenkins plugin.
             publishHTML([
-                allowMissing: true,
+                allowMissing:          true,
                 alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'playwright-report',
-                reportFiles: 'index.html',
-                reportName: 'Playwright Report'
+                keepAll:               true,
+                reportDir:             'playwright-report',
+                reportFiles:           'index.html',
+                reportName:            'Playwright HTML Report',
+                reportTitles:          'Playwright Report'
             ])
+
+            // Allure report — served inline from Jenkins.
+            // Requires the "Allure" Jenkins plugin.
+            // If the plugin is installed, prefer this over publishHTML for
+            // Allure because it automatically manages history and trend graphs.
+            //
+            // allure([
+            //     reportBuildPolicy: 'ALWAYS',
+            //     results: [[path: 'allure-results']]
+            // ])
         }
+
+        // ── Stop ParaBank ─────────────────────────────────────────────────
+        // Mirror the start command from the 'Start ParaBank' stage.
+        //
+        // Option A — Docker:
+        //   always { bat 'docker stop parabank && docker rm -f parabank' }
+        //
+        // Option B — Tomcat service:
+        //   always { bat 'net stop Tomcat9' }
+        //
+        // Option C — always-on: no teardown needed.
     }
 }

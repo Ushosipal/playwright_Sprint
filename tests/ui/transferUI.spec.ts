@@ -131,7 +131,7 @@ test.describe('UI Transfer Validations @ui', () => {
     Logger.info('TC-UI-004: Overdraft transfer submitted via UI');
 
   
-    // Expected UI should show "Insufficient funds" error and reject the transfer
+   
     let bugActive = false;
     try {
       await page.locator(TransferLocators.successMessageBody)
@@ -193,7 +193,6 @@ test.describe('UI Transfer Validations @ui', () => {
     await transferPage.performTransfer(transferAmount, sourceAccount, destinationAccount);
     Logger.info('TC-UI-005: Transfer with empty amount submitted via UI');
 
-    // Expected a validation error should appear, form should NOT submit, no transfer occurs
     let successAppeared = false;
     try {
       await page.locator(TransferLocators.successMessageBody)
@@ -271,7 +270,7 @@ test.describe('UI Transfer Validations @ui', () => {
         .locator(TransferLocators.errorMessage).last().isVisible().catch(() => false);
 
       expect.soft(errorVisible,
-        'DEF-FT-004 appears FIXED — same-account validation now correctly triggers an error message.'
+        'DEF-FT-004 appears FIXED - same-account validation now correctly triggers an error message.'
       ).toBeTruthy();
 
       Logger.info('TC-UI-006: Bug DEF-FT-004 appears FIXED — error message displayed correctly');

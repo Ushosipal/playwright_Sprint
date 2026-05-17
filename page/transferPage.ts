@@ -12,14 +12,14 @@ export class TransferFundsPage {
     const accountsResponsePromise = this.page.waitForResponse(
       res => /\/services_proxy\/bank\/customers\/\d+\/accounts/.test(res.url())
              && res.status() === 200,
-      { timeout: 15_000 }
+      { timeout: 15000 }
     ).catch(() => null);
 
     await this.page.goto('/parabank/transfer.htm', { waitUntil: 'domcontentloaded' });
     await accountsResponsePromise;
 
     await this.page.locator(`${TransferLocators.fromAccountIdSelect} option`)
-      .first().waitFor({ state: 'attached', timeout: 10_000 });
+      .first().waitFor({ state: 'attached', timeout: 10000 });
   }
 
 
@@ -31,7 +31,7 @@ export class TransferFundsPage {
     
     const transferResponse = this.page.waitForResponse(
       res => res.url().includes('/transfer') && res.request().method() === 'POST',
-      { timeout: 15_000 }
+      { timeout: 15000 }
     ).catch(() => null);
 
     await this.page.locator(TransferLocators.transferButton).click();
@@ -56,7 +56,7 @@ export class TransferFundsPage {
     const formattedAmount = parseFloat(amount).toFixed(2);
 
     await this.page.locator(TransferLocators.successMessageTitle)
-      .waitFor({ state: 'visible', timeout: 10_000 });
+      .waitFor({ state: 'visible', timeout: 10000 });
 
     await expect(
       this.page.locator(TransferLocators.successMessageTitle),
