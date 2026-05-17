@@ -23,48 +23,46 @@ pipeline {
 
         stage('Setup') {
             steps {
-                sh '''
-                    node --version
-                    npm --version
-                    npm ci
-                    npx playwright install --with-deps chromium
-                '''
+                bat 'node --version'
+                bat 'npm --version'
+                bat 'npm ci'
+                bat 'npx playwright install chromium'
             }
         }
 
         stage('Type Check') {
             steps {
-                sh 'npm run type-check'
+                bat 'npm run type-check'
             }
         }
 
         stage('UI Tests') {
             steps {
-                sh 'npm run test:ui || true'
+                bat 'npm run test:ui'
             }
         }
 
         stage('API Tests') {
             steps {
-                sh 'npm run test:api || true'
+                bat 'npm run test:api'
             }
         }
 
         stage('E2E Hybrid') {
             steps {
-                sh 'npm run test:e2e || true'
+                bat 'npm run test:e2e'
             }
         }
 
         stage('Performance Lite') {
             steps {
-                sh 'npm run test:perf || true'
+                bat 'npm run test:perf'
             }
         }
 
         stage('Generate Allure Report') {
             steps {
-                sh 'npm run report:allure:generate || true'
+                bat 'npm run report:allure:generate'
             }
         }
     }
