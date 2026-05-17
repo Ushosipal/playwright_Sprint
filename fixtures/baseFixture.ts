@@ -97,4 +97,14 @@ export const test = base.extend<TestFixtures>({
   }
 });
 
+test.afterEach(async ({ page }, testInfo) => {
+  try {
+    if (!page.isClosed()) {
+      await page.close();
+    }
+  } catch (error) {
+    Logger.warn(`Cleanup skipped: ${error}`);
+  }
+});
+
 export { expect };
