@@ -1,0 +1,14 @@
+2026-05-16 15:09:19 [info]: Fixture: staggered start delay = 2069 ms
+2026-05-16 15:09:21 [info]: Fixture: starting UI registration for username=qauser_1778924361292
+2026-05-16 15:09:21 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 15:09:21 [info]: RegisterPage: Submitting registration for username=qauser_1778924361292
+2026-05-16 15:09:22 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 15:09:22 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 15:09:22 [info]: AccountOverviewPage: Primary account captured: #14787
+2026-05-16 15:09:22 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 15:09:22 [info]: OpenAccountPage: Opening Savings account funded from #14787
+2026-05-16 15:09:22 [info]: OpenAccountPage: New account created: #14898
+2026-05-16 15:09:22 [info]: Fixture COMPLETE: user=qauser_1778924361292 account1=14787 account2=14898
+2026-05-16 15:09:22 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-16 15:09:23 [info]: TransferFundsPage: Transferring $: #14787 -> #14898
+2026-05-16 15:09:23 [info]: TC-UI-04-A: defect path — soft assertions only

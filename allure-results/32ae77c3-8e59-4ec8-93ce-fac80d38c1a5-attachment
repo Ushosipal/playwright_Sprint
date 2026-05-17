@@ -1,0 +1,16 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transfer.ui.spec.ts >> UI Transfer Validations @ui >> TC-UI-04-A: Empty amount field — should be rejected by UI @defects @FR-09
+- Location: tests\ui\transfer.ui.spec.ts:25:9
+
+# Error details
+
+```
+Tearing down "context" exceeded the test timeout of 60000ms.
+```

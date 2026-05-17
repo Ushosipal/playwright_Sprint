@@ -1,0 +1,218 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: performance-lite\perf.spec.ts >> Performance Lite @perf >> TC-PERF-03: POST /transfer response < 3000 ms
+- Location: tests\performance-lite\perf.spec.ts:59:7
+
+# Error details
+
+```
+Error: Registration should land on Welcome page
+
+expect(locator).toContainText(expected) failed
+
+Locator: locator('.title')
+Expected substring: "Welcome"
+Error: strict mode violation: locator('.title') resolved to 3 elements:
+    1) <h1 class="title">Open New Account</h1> aka getByRole('heading', { name: 'Open New Account' })
+    2) <h1 class="title">Account Opened!</h1> aka getByText('Account Opened!')
+    3) <h1 class="title">Error!</h1> aka getByText('Error!')
+
+Call log:
+  - Registration should land on Welcome page with timeout 15000ms
+  - waiting for locator('.title')
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link:
+        - /url: admin.htm
+        - img [ref=e4] [cursor=pointer]
+      - link "ParaBank":
+        - /url: index.htm
+        - img "ParaBank" [ref=e5] [cursor=pointer]
+      - paragraph [ref=e6]: Experience the difference
+    - generic [ref=e7]:
+      - list [ref=e8]:
+        - listitem [ref=e9]: Solutions
+        - listitem [ref=e10]:
+          - link "About Us" [ref=e11] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e12]:
+          - link "Services" [ref=e13] [cursor=pointer]:
+            - /url: services.htm
+        - listitem [ref=e14]:
+          - link "Products" [ref=e15] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/products.jsp
+        - listitem [ref=e16]:
+          - link "Locations" [ref=e17] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - listitem [ref=e18]:
+          - link "Admin Page" [ref=e19] [cursor=pointer]:
+            - /url: admin.htm
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "home" [ref=e22] [cursor=pointer]:
+            - /url: index.htm
+        - listitem [ref=e23]:
+          - link "about" [ref=e24] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e25]:
+          - link "contact" [ref=e26] [cursor=pointer]:
+            - /url: contact.htm
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: Welcome Ushosi Pal
+        - heading "Account Services" [level=2] [ref=e30]
+        - list [ref=e31]:
+          - listitem [ref=e32]:
+            - link "Open New Account" [ref=e33] [cursor=pointer]:
+              - /url: openaccount.htm
+          - listitem [ref=e34]:
+            - link "Accounts Overview" [ref=e35] [cursor=pointer]:
+              - /url: overview.htm
+          - listitem [ref=e36]:
+            - link "Transfer Funds" [ref=e37] [cursor=pointer]:
+              - /url: transfer.htm
+          - listitem [ref=e38]:
+            - link "Bill Pay" [ref=e39] [cursor=pointer]:
+              - /url: billpay.htm
+          - listitem [ref=e40]:
+            - link "Find Transactions" [ref=e41] [cursor=pointer]:
+              - /url: findtrans.htm
+          - listitem [ref=e42]:
+            - link "Update Contact Info" [ref=e43] [cursor=pointer]:
+              - /url: updateprofile.htm
+          - listitem [ref=e44]:
+            - link "Request Loan" [ref=e45] [cursor=pointer]:
+              - /url: requestloan.htm
+          - listitem [ref=e46]:
+            - link "Log Out" [ref=e47] [cursor=pointer]:
+              - /url: logout.htm
+      - generic [ref=e50]:
+        - heading "Open New Account" [level=1] [ref=e51]
+        - generic [ref=e52]:
+          - paragraph [ref=e53]: What type of Account would you like to open?
+          - combobox [ref=e54]
+          - paragraph [ref=e55]: A minimum of null must be deposited into this account at time of opening. Please choose an existing account to transfer funds into the new account.
+          - combobox [ref=e56]
+          - button "Open New Account" [ref=e58] [cursor=pointer]
+  - generic [ref=e60]:
+    - list [ref=e61]:
+      - listitem [ref=e62]:
+        - link "Home" [ref=e63] [cursor=pointer]:
+          - /url: index.htm
+        - text: "|"
+      - listitem [ref=e64]:
+        - link "About Us" [ref=e65] [cursor=pointer]:
+          - /url: about.htm
+        - text: "|"
+      - listitem [ref=e66]:
+        - link "Services" [ref=e67] [cursor=pointer]:
+          - /url: services.htm
+        - text: "|"
+      - listitem [ref=e68]:
+        - link "Products" [ref=e69] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/products.jsp
+        - text: "|"
+      - listitem [ref=e70]:
+        - link "Locations" [ref=e71] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - text: "|"
+      - listitem [ref=e72]:
+        - link "Forum" [ref=e73] [cursor=pointer]:
+          - /url: http://forums.parasoft.com/
+        - text: "|"
+      - listitem [ref=e74]:
+        - link "Site Map" [ref=e75] [cursor=pointer]:
+          - /url: sitemap.htm
+        - text: "|"
+      - listitem [ref=e76]:
+        - link "Contact Us" [ref=e77] [cursor=pointer]:
+          - /url: contact.htm
+    - paragraph [ref=e78]: © Parasoft. All rights reserved.
+    - list [ref=e79]:
+      - listitem [ref=e80]: "Visit us at:"
+      - listitem [ref=e81]:
+        - link "www.parasoft.com" [ref=e82] [cursor=pointer]:
+          - /url: http://www.parasoft.com/
+```
+
+# Test source
+
+```ts
+  1  | import { Page, expect } from '@playwright/test';
+  2  | import { Logger } from '../utils/logger';
+  3  | 
+  4  | export interface RegistrationData {
+  5  |   firstName?: string;
+  6  |   lastName?: string;
+  7  |   street?: string;
+  8  |   city?: string;
+  9  |   state?: string;
+  10 |   zipCode?: string;
+  11 |   phoneNumber?: string;
+  12 |   ssn?: string;
+  13 |   username: string;
+  14 |   password: string;
+  15 | }
+  16 | 
+  17 | export class RegisterPage {
+  18 |   constructor(public readonly page: Page) {}
+  19 | 
+  20 |   async navigate(): Promise<void> {
+  21 |     Logger.info('RegisterPage: Navigating to /parabank/register.htm');
+  22 |     await this.page.goto('/parabank/register.htm');
+  23 |   }
+  24 |   async registerDynamicUser(data: RegistrationData): Promise<void> {
+  25 |     const filled: Required<RegistrationData> = {
+  26 |       firstName: data.firstName ?? 'Ushosi',
+  27 |       lastName: data.lastName ?? 'Pal',
+  28 |       street: data.street ?? 'Haldia',
+  29 |       city: data.city ?? 'Haldia',
+  30 |       state: data.state ?? 'TS',
+  31 |       zipCode: data.zipCode ?? '721602',
+  32 |       phoneNumber: data.phoneNumber ?? '555-0199',
+  33 |       ssn: data.ssn ?? `SSN-12345789`,
+  34 |       username: data.username,
+  35 |       password: data.password
+  36 |     };
+  37 | 
+  38 |     Logger.info(`RegisterPage: Submitting registration for username=${filled.username}`);
+  39 | 
+  40 |   
+  41 |     await this.page.locator('input[id="customer.firstName"]').fill(filled.firstName);
+  42 |     await this.page.locator('input[id="customer.lastName"]').fill(filled.lastName);
+  43 |     await this.page.locator('input[id="customer.address.street"]').fill(filled.street);
+  44 |     await this.page.locator('input[id="customer.address.city"]').fill(filled.city);
+  45 |     await this.page.locator('input[id="customer.address.state"]').fill(filled.state);
+  46 |     await this.page.locator('input[id="customer.address.zipCode"]').fill(filled.zipCode);
+  47 |     await this.page.locator('input[id="customer.phoneNumber"]').fill(filled.phoneNumber);
+  48 |     await this.page.locator('input[id="customer.ssn"]').fill(filled.ssn);
+  49 |     await this.page.locator('input[id="customer.username"]').fill(filled.username);
+  50 | 
+  51 |     await this.page.locator('input[id="customer.password"]').fill(filled.password);
+  52 |     await this.page.locator('input[id="repeatedPassword"]').fill(filled.password);
+  53 | 
+  54 |   
+  55 |     await this.page.getByRole('button', { name: 'Register' }).click();
+  56 |   }
+  57 |   
+  58 |   async verifyRegistrationSuccess(): Promise<void> {
+  59 |     await expect(this.page.locator('.title'), 'Registration should land on Welcome page')
+> 60 |       .toContainText('Welcome', { timeout: 15000 });
+     |        ^ Error: Registration should land on Welcome page
+  61 |     Logger.info('RegisterPage: Registration successful (Welcome page detected)');
+  62 |   }
+  63 | }
+```

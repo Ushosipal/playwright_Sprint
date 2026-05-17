@@ -1,0 +1,145 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: api\transferAPI.spec.ts >> API Transfer Validations @api >> TC-API-003: Destination account balance is credited correctly via API @regression @FR-06
+- Location: tests\api\transferAPI.spec.ts:124:7
+
+# Error details
+
+```
+Error: Registration should land on Welcome page
+
+expect(locator).toContainText(expected) failed
+
+Locator: locator('#rightPanel .title')
+Expected pattern: /^Welcome\s+\w+$/
+Received string:  "Signing up is easy!"
+Timeout: 15000ms
+
+Call log:
+  - Registration should land on Welcome page with timeout 15000ms
+  - waiting for locator('#rightPanel .title')
+    33 × locator resolved to <h1 class="title">Signing up is easy!</h1>
+       - unexpected value "Signing up is easy!"
+
+```
+
+```yaml
+- heading "Signing up is easy!" [level=1]
+```
+
+# Test source
+
+```ts
+  24  | //   async registerDynamicUser(data: RegistrationData): Promise<void> {
+  25  | //     const filled: Required<RegistrationData> = {
+  26  | //       firstName: data.firstName ?? 'Ushosi',
+  27  | //       lastName: data.lastName ?? 'Pal',
+  28  | //       street: data.street ?? 'Haldia',
+  29  | //       city: data.city ?? 'Haldia',
+  30  | //       state: data.state ?? 'TS',
+  31  | //       zipCode: data.zipCode ?? '721602',
+  32  | //       phoneNumber: data.phoneNumber ?? '555-0199',
+  33  | //       ssn: data.ssn ?? `SSN-12345789`,
+  34  | //       username: data.username,
+  35  | //       password: data.password
+  36  | //     };
+  37  | 
+  38  | //     Logger.info(`RegisterPage: Submitting registration for username=${filled.username}`);
+  39  | 
+  40  |   
+  41  | //     await this.page.locator('input[id="customer.firstName"]').fill(filled.firstName);
+  42  | //     await this.page.locator('input[id="customer.lastName"]').fill(filled.lastName);
+  43  | //     await this.page.locator('input[id="customer.address.street"]').fill(filled.street);
+  44  | //     await this.page.locator('input[id="customer.address.city"]').fill(filled.city);
+  45  | //     await this.page.locator('input[id="customer.address.state"]').fill(filled.state);
+  46  | //     await this.page.locator('input[id="customer.address.zipCode"]').fill(filled.zipCode);
+  47  | //     await this.page.locator('input[id="customer.phoneNumber"]').fill(filled.phoneNumber);
+  48  | //     await this.page.locator('input[id="customer.ssn"]').fill(filled.ssn);
+  49  | //     await this.page.locator('input[id="customer.username"]').fill(filled.username);
+  50  | 
+  51  | //     await this.page.locator('input[id="customer.password"]').fill(filled.password);
+  52  | //     await this.page.locator('input[id="repeatedPassword"]').fill(filled.password);
+  53  | 
+  54  |   
+  55  | //     await this.page.getByRole('button', { name: 'Register' }).click();
+  56  | //   }
+  57  |   
+  58  | //   async verifyRegistrationSuccess(): Promise<void> {
+  59  | //     await expect(this.page.locator('.title'), 'Registration should land on Welcome page')
+  60  | //       .toContainText('Welcome', { timeout: 15000 });
+  61  | //     Logger.info('RegisterPage: Registration successful (Welcome page detected)');
+  62  | //   }
+  63  | // }
+  64  | 
+  65  | import { Page, expect } from '@playwright/test';
+  66  | import { Logger } from '../utils/logger';
+  67  | 
+  68  | export interface RegistrationData {
+  69  |   firstName?: string;
+  70  |   lastName?: string;
+  71  |   street?: string;
+  72  |   city?: string;
+  73  |   state?: string;
+  74  |   zipCode?: string;
+  75  |   phoneNumber?: string;
+  76  |   ssn?: string;
+  77  |   username: string;
+  78  |   password: string;
+  79  | }
+  80  | 
+  81  | export class RegisterPage {
+  82  |   constructor(public readonly page: Page) {}
+  83  | 
+  84  |   async navigate(): Promise<void> {
+  85  |     Logger.info('RegisterPage: Navigating to /parabank/register.htm');
+  86  |     await this.page.goto('/parabank/register.htm');
+  87  |   }
+  88  |   async registerDynamicUser(data: RegistrationData): Promise<void> {
+  89  |     const filled: Required<RegistrationData> = {
+  90  |       firstName: data.firstName ?? 'Ushosi',
+  91  |       lastName: data.lastName ?? 'Pal',
+  92  |       street: data.street ?? 'Haldia',
+  93  |       city: data.city ?? 'Haldia',
+  94  |       state: data.state ?? 'TS',
+  95  |       zipCode: data.zipCode ?? '721602',
+  96  |       phoneNumber: data.phoneNumber ?? '555-0199',
+  97  |       ssn: data.ssn ?? `SSN-12345789`,
+  98  |       username: data.username,
+  99  |       password: data.password
+  100 |     };
+  101 | 
+  102 |     Logger.info(`RegisterPage: Submitting registration for username=${filled.username}`);
+  103 | 
+  104 |   
+  105 |     await this.page.locator('input[id="customer.firstName"]').fill(filled.firstName);
+  106 |     await this.page.locator('input[id="customer.lastName"]').fill(filled.lastName);
+  107 |     await this.page.locator('input[id="customer.address.street"]').fill(filled.street);
+  108 |     await this.page.locator('input[id="customer.address.city"]').fill(filled.city);
+  109 |     await this.page.locator('input[id="customer.address.state"]').fill(filled.state);
+  110 |     await this.page.locator('input[id="customer.address.zipCode"]').fill(filled.zipCode);
+  111 |     await this.page.locator('input[id="customer.phoneNumber"]').fill(filled.phoneNumber);
+  112 |     await this.page.locator('input[id="customer.ssn"]').fill(filled.ssn);
+  113 |     await this.page.locator('input[id="customer.username"]').fill(filled.username);
+  114 | 
+  115 |     await this.page.locator('input[id="customer.password"]').fill(filled.password);
+  116 |     await this.page.locator('input[id="repeatedPassword"]').fill(filled.password);
+  117 | 
+  118 |   
+  119 |     await this.page.getByRole('button', { name: 'Register' }).click();
+  120 |   }
+  121 |   
+  122 | async verifyRegistrationSuccess(): Promise<void> {
+  123 |   await expect(this.page.locator('#rightPanel .title'), 'Registration should land on Welcome page')
+> 124 |     .toContainText(/^Welcome\s+\w+$/, { timeout: 15000 });
+      |      ^ Error: Registration should land on Welcome page
+  125 |     
+  126 |   Logger.info('RegisterPage: Registration successful (Welcome page detected)');
+  127 | }
+  128 | }
+```

@@ -1,0 +1,13 @@
+2026-05-16 15:09:04 [info]: Fixture: staggered start delay = 2398 ms
+2026-05-16 15:09:07 [info]: Fixture: starting UI registration for username=qauser_1778924347248
+2026-05-16 15:09:07 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 15:09:07 [info]: RegisterPage: Submitting registration for username=qauser_1778924347248
+2026-05-16 15:09:08 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 15:09:08 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 15:09:08 [info]: AccountOverviewPage: Primary account captured: #14121
+2026-05-16 15:09:08 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 15:09:08 [info]: OpenAccountPage: Opening Savings account funded from #14121
+2026-05-16 15:09:08 [info]: OpenAccountPage: New account created: #14232
+2026-05-16 15:09:08 [info]: Fixture COMPLETE: user=qauser_1778924347248 account1=14121 account2=14232
+2026-05-16 15:09:08 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-16 15:09:09 [info]: TransferFundsPage: Transferring $100: #14121 -> #14232

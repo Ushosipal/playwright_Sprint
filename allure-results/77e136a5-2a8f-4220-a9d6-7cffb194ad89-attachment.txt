@@ -1,0 +1,19 @@
+2026-05-17 13:45:46 [info]: Fixture: staggered start delay = 2498 ms
+2026-05-17 13:45:48 [info]: Fixture: starting UI registration for username=qauser_1779005748853
+2026-05-17 13:45:48 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-17 13:45:53 [info]: RegisterPage: Submitting registration for username=qauser_1779005748853
+2026-05-17 13:46:08 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-17 13:46:08 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-17 13:46:10 [info]: AccountOverviewPage: Primary account captured: #158310
+2026-05-17 13:46:10 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-17 13:46:10 [info]: OpenAccountPage: Opening Savings account funded from #158310
+2026-05-17 13:46:12 [info]: OpenAccountPage: New account created: #158532
+2026-05-17 13:46:12 [info]: Fixture COMPLETE: user=qauser_1779005748853 account1=158310 account2=158532
+2026-05-17 13:46:12 [info]: TC-UI-003: Executing minimum boundary transfer of $0.01
+2026-05-17 13:46:12 [info]: TC-UI-003: Arrange complete — amount=0.01, from=#158310, to=#158532
+2026-05-17 13:46:12 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-17 13:46:13 [info]: TC-UI-003: Navigated to Transfer Funds page
+2026-05-17 13:46:13 [info]: TransferFundsPage: Transferring $0.01: #158310 -> #158532
+2026-05-17 13:46:15 [info]: TC-UI-003: Minimum boundary transfer ($0.01) submitted via UI
+2026-05-17 13:46:16 [info]: TC-UI-003: Confirmation page verified — "Transfer Complete!" displayed
+2026-05-17 13:46:16 [info]: TC-UI-003: PASSED — $0.01 boundary transfer accepted and confirmed with correct details

@@ -1,0 +1,12 @@
+2026-05-16 21:29:19 [info]: Fixture: staggered start delay = 2749 ms
+2026-05-16 21:29:22 [info]: Fixture: starting UI registration for username=qauser_1778947162421
+2026-05-16 21:29:22 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 21:29:22 [info]: RegisterPage: Submitting registration for username=qauser_1778947162421
+2026-05-16 21:29:22 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 21:29:22 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 21:29:23 [info]: AccountOverviewPage: Primary account captured: #34323
+2026-05-16 21:29:23 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 21:29:23 [info]: OpenAccountPage: Opening Savings account funded from #34323
+2026-05-16 21:29:23 [info]: OpenAccountPage: New account created: #34434
+2026-05-16 21:29:23 [info]: Fixture COMPLETE: user=qauser_1778947162421 account1=34323 account2=34434
+2026-05-16 21:29:23 [info]: TC-UI-005: Executing transfer with empty amount field — expecting validation rejection

@@ -1,0 +1,23 @@
+2026-05-16 21:45:57 [info]: Fixture: staggered start delay = 954 ms
+2026-05-16 21:45:58 [info]: Fixture: starting UI registration for username=qauser_1778948158500
+2026-05-16 21:45:58 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 21:45:58 [info]: RegisterPage: Submitting registration for username=qauser_1778948158500
+2026-05-16 21:46:00 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 21:46:00 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 21:46:01 [info]: AccountOverviewPage: Primary account captured: #44424
+2026-05-16 21:46:01 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 21:46:01 [info]: OpenAccountPage: Opening Savings account funded from #44424
+2026-05-16 21:46:02 [info]: OpenAccountPage: New account created: #44757
+2026-05-16 21:46:02 [info]: Fixture COMPLETE: user=qauser_1778948158500 account1=44424 account2=44757
+2026-05-16 21:46:02 [info]: TC-E2E-003: Executing hybrid minimum boundary test — $0.01 transfer with API balance verification
+2026-05-16 21:46:02 [info]: TC-E2E-003: Arrange complete — amount=0.01, from=#44424, to=#44757
+2026-05-16 21:46:02 [info]: TC-E2E-003: Pre-transfer source balance = $415.5
+2026-05-16 21:46:02 [info]: TC-E2E-003: Pre-transfer destination balance = $100
+2026-05-16 21:46:02 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-16 21:46:03 [info]: TC-E2E-003: Navigated to Transfer Funds page
+2026-05-16 21:46:03 [info]: TransferFundsPage: Transferring $0.01: #44424 -> #44757
+2026-05-16 21:46:03 [info]: TC-E2E-003: Minimum boundary transfer ($0.01) submitted via UI
+2026-05-16 21:46:03 [info]: TC-E2E-003: UI confirmation page verified — "$0.01" transfer confirmed
+2026-05-16 21:46:03 [info]: TC-E2E-003: Post-transfer source balance = $415.49
+2026-05-16 21:46:04 [info]: TC-E2E-003: Post-transfer destination balance = $100.01
+2026-05-16 21:46:04 [info]: TC-E2E-003: PASSED — $0.01 boundary correctly reflected: source -$0.01, destination +$0.01

@@ -1,0 +1,15 @@
+2026-05-16 16:50:21 [info]: Fixture: staggered start delay = 1717 ms
+2026-05-16 16:50:23 [info]: Fixture: starting UI registration for username=qauser_1778930423468
+2026-05-16 16:50:23 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 16:50:23 [info]: RegisterPage: Submitting registration for username=qauser_1778930423468
+2026-05-16 16:50:24 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 16:50:24 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 16:50:24 [info]: AccountOverviewPage: Primary account captured: #34989
+2026-05-16 16:50:24 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 16:50:24 [info]: OpenAccountPage: Opening Savings account funded from #34989
+2026-05-16 16:50:24 [info]: OpenAccountPage: New account created: #35100
+2026-05-16 16:50:24 [info]: Fixture COMPLETE: user=qauser_1778930423468 account1=34989 account2=35100
+2026-05-16 16:50:24 [info]: TC-E2E-03: pre-balance source=$415.5 target=$100
+2026-05-16 16:50:24 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-16 16:50:24 [info]: TransferFundsPage: Transferring $0.01: #34989 -> #35100
+2026-05-16 16:50:24 [info]: TC-E2E-03: post-balance source=$415.49 target=$100.01

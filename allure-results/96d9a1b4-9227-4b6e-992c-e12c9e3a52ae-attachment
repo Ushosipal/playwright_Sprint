@@ -1,0 +1,286 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transferUI.spec.ts >> UI Transfer Validations @ui >> TC-UI-006: Same source and destination account allowed (DEF-FT-004) @defects @FR-09
+- Location: tests\ui\transferUI.spec.ts:226:7
+
+# Error details
+
+```
+TypeError: Cannot read properties of undefined (reading 'amount')
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link:
+        - /url: admin.htm
+        - img [ref=e4] [cursor=pointer]
+      - link "ParaBank":
+        - /url: index.htm
+        - img "ParaBank" [ref=e5] [cursor=pointer]
+      - paragraph [ref=e6]: Experience the difference
+    - generic [ref=e7]:
+      - list [ref=e8]:
+        - listitem [ref=e9]: Solutions
+        - listitem [ref=e10]:
+          - link "About Us" [ref=e11] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e12]:
+          - link "Services" [ref=e13] [cursor=pointer]:
+            - /url: services.htm
+        - listitem [ref=e14]:
+          - link "Products" [ref=e15] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/products.jsp
+        - listitem [ref=e16]:
+          - link "Locations" [ref=e17] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - listitem [ref=e18]:
+          - link "Admin Page" [ref=e19] [cursor=pointer]:
+            - /url: admin.htm
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "home" [ref=e22] [cursor=pointer]:
+            - /url: index.htm
+        - listitem [ref=e23]:
+          - link "about" [ref=e24] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e25]:
+          - link "contact" [ref=e26] [cursor=pointer]:
+            - /url: contact.htm
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: Welcome Ushosi Pal
+        - heading "Account Services" [level=2] [ref=e30]
+        - list [ref=e31]:
+          - listitem [ref=e32]:
+            - link "Open New Account" [ref=e33] [cursor=pointer]:
+              - /url: openaccount.htm
+          - listitem [ref=e34]:
+            - link "Accounts Overview" [ref=e35] [cursor=pointer]:
+              - /url: overview.htm
+          - listitem [ref=e36]:
+            - link "Transfer Funds" [ref=e37] [cursor=pointer]:
+              - /url: transfer.htm
+          - listitem [ref=e38]:
+            - link "Bill Pay" [ref=e39] [cursor=pointer]:
+              - /url: billpay.htm
+          - listitem [ref=e40]:
+            - link "Find Transactions" [ref=e41] [cursor=pointer]:
+              - /url: findtrans.htm
+          - listitem [ref=e42]:
+            - link "Update Contact Info" [ref=e43] [cursor=pointer]:
+              - /url: updateprofile.htm
+          - listitem [ref=e44]:
+            - link "Request Loan" [ref=e45] [cursor=pointer]:
+              - /url: requestloan.htm
+          - listitem [ref=e46]:
+            - link "Log Out" [ref=e47] [cursor=pointer]:
+              - /url: logout.htm
+      - generic [ref=e50]:
+        - heading "Account Opened!" [level=1] [ref=e51]
+        - paragraph [ref=e52]: Congratulations, your account is now open.
+        - paragraph [ref=e53]:
+          - text: "Your new account number:"
+          - link "29439" [ref=e54] [cursor=pointer]:
+            - /url: activity.htm?id=29439
+  - generic [ref=e56]:
+    - list [ref=e57]:
+      - listitem [ref=e58]:
+        - link "Home" [ref=e59] [cursor=pointer]:
+          - /url: index.htm
+        - text: "|"
+      - listitem [ref=e60]:
+        - link "About Us" [ref=e61] [cursor=pointer]:
+          - /url: about.htm
+        - text: "|"
+      - listitem [ref=e62]:
+        - link "Services" [ref=e63] [cursor=pointer]:
+          - /url: services.htm
+        - text: "|"
+      - listitem [ref=e64]:
+        - link "Products" [ref=e65] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/products.jsp
+        - text: "|"
+      - listitem [ref=e66]:
+        - link "Locations" [ref=e67] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - text: "|"
+      - listitem [ref=e68]:
+        - link "Forum" [ref=e69] [cursor=pointer]:
+          - /url: http://forums.parasoft.com/
+        - text: "|"
+      - listitem [ref=e70]:
+        - link "Site Map" [ref=e71] [cursor=pointer]:
+          - /url: sitemap.htm
+        - text: "|"
+      - listitem [ref=e72]:
+        - link "Contact Us" [ref=e73] [cursor=pointer]:
+          - /url: contact.htm
+    - paragraph [ref=e74]: © Parasoft. All rights reserved.
+    - list [ref=e75]:
+      - listitem [ref=e76]: "Visit us at:"
+      - listitem [ref=e77]:
+        - link "www.parasoft.com" [ref=e78] [cursor=pointer]:
+          - /url: http://www.parasoft.com/
+```
+
+# Test source
+
+```ts
+  136 |     try {
+  137 |       await page.locator(TransferLocators.successMessageBody)
+  138 |         .waitFor({ state: 'visible', timeout: 5000 });
+  139 |       bugActive = true;
+  140 |       Logger.info('TC-UI-004: Success message appeared — bug DEF-FT-001 is ACTIVE');
+  141 |     } catch {
+  142 |       bugActive = false;
+  143 |       Logger.info('TC-UI-004: Success message did NOT appear — bug DEF-FT-001 may be FIXED');
+  144 |     }
+  145 | 
+  146 |     if (bugActive) {
+  147 |       expect.soft(bugActive,
+  148 |         'DEF-FT-001 active: UI accepted insufficient-funds transfer of $' + transferAmount +
+  149 |         ' and displayed confirmation page. Source balance is now deeply negative. ' +
+  150 |         'Expected: UI should display an "Insufficient funds" error and reject the transfer.'
+  151 |       ).toBeTruthy();
+  152 | 
+  153 |       Logger.info('TC-UI-004: Soft assertion logged — DEF-FT-001 confirmed ACTIVE, overdraft was processed');
+  154 |     } else {
+  155 |       const errorVisible = await page
+  156 |         .locator(TransferLocators.errorMessage)
+  157 |         .last()
+  158 |         .isVisible()
+  159 |         .catch(() => false);
+  160 | 
+  161 |       expect.soft(errorVisible,
+  162 |         'DEF-FT-001 appears FIXED — validation now correctly triggers an insufficient-funds error.'
+  163 |       ).toBeTruthy();
+  164 | 
+  165 |       Logger.info('TC-UI-004: Bug DEF-FT-001 appears FIXED — error message displayed correctly');
+  166 |     }
+  167 | 
+  168 |     Logger.info(`TC-UI-004: COMPLETED — Defect path finished, bug active: ${bugActive}`);
+  169 |   });
+  170 | 
+  171 | 
+  172 | //5
+  173 |   test('TC-UI-005: Empty Amount field is rejected @regression @FR-09', async ({ activeUser, transferPage, page }) => {
+  174 |     Logger.info('TC-UI-005: Executing transfer with empty amount field — expecting validation rejection');
+  175 | 
+  176 |   
+  177 |     test.info().annotations.push({ type: 'Test Type', description: 'UI (Negative)' });
+  178 |     test.info().annotations.push({ type: 'Scenario', description: 'TS-FT-09' });
+  179 |     test.info().annotations.push({ type: 'Requirement', description: 'FR-09' });
+  180 |     test.info().annotations.push({ type: 'Doc Status', description: 'Pass' });
+  181 | 
+  182 |     const data = uiData.find(d => d.testCaseId === 'TC-UI-04-A')!;
+  183 |     const transferAmount = data.amount;
+  184 |     const sourceAccount = activeUser.account1;
+  185 |     const destinationAccount = activeUser.account2;
+  186 | 
+  187 |     Logger.info(`TC-UI-005: Arrange complete — amount="${transferAmount}" (empty), from=#${sourceAccount}, to=#${destinationAccount}`);
+  188 | 
+  189 |   
+  190 |     await transferPage.navigate();
+  191 |     Logger.info('TC-UI-005: Navigated to Transfer Funds page');
+  192 | 
+  193 |     await transferPage.performTransfer(transferAmount, sourceAccount, destinationAccount);
+  194 |     Logger.info('TC-UI-005: Transfer with empty amount submitted via UI');
+  195 | 
+  196 |     // Expected a validation error should appear, form should NOT submit, no transfer occurs
+  197 |     let successAppeared = false;
+  198 |     try {
+  199 |       await page.locator(TransferLocators.successMessageBody)
+  200 |         .waitFor({ state: 'visible', timeout: 5000 });
+  201 |       successAppeared = true;
+  202 |       Logger.info('TC-UI-005: WARNING — Success message appeared for empty amount');
+  203 |     } catch {
+  204 |       successAppeared = false;
+  205 |       Logger.info('TC-UI-005: Success message did NOT appear — correct behavior');
+  206 |     }
+  207 | 
+  208 |     if (successAppeared) {
+  209 |       expect.soft(successAppeared,
+  210 |         'Empty amount was incorrectly accepted — transfer confirmation page was shown. ' +
+  211 |         'Expected: Validation error message, no form submission.'
+  212 |       ).toBeFalsy();
+  213 | 
+  214 |       Logger.info('TC-UI-005: UNEXPECTED — Empty amount accepted, this is a defect');
+  215 |     } else {
+  216 |       const errorVisible = await page
+  217 |         .locator(TransferLocators.errorMessage).last().isVisible().catch(() => false);
+  218 |       Logger.info(`TC-UI-005: Form correctly rejected empty amount. Error message visible: ${errorVisible}`);
+  219 |     }
+  220 | 
+  221 |     Logger.info('TC-UI-005: COMPLETED — Empty amount validation verified');
+  222 |   });
+  223 | 
+  224 |   
+  225 | //6
+  226 |   test('TC-UI-006: Same source and destination account allowed (DEF-FT-004) @defects @FR-09', async ({ activeUser, transferPage, page }) => {
+  227 |     Logger.info('TC-UI-006: Executing same-account transfer (from=to) — expecting rejection but known defect DEF-FT-004');
+  228 | 
+  229 |     test.info().annotations.push({ type: 'Test Type', description: 'UI (Negative)' });
+  230 |     test.info().annotations.push({ type: 'Scenario', description: 'TS-FT-10' });
+  231 |     test.info().annotations.push({ type: 'Requirement', description: 'FR-09' });
+  232 |     test.info().annotations.push({ type: 'Known Bug', description: 'DEF-FT-004' });
+  233 |     test.info().annotations.push({ type: 'Doc Status', description: 'Fail' });
+  234 | 
+  235 |     const data = uiData.find(d => d.testCaseId === 'TC-UI-07')!;
+> 236 |     const transferAmount = data.amount;
+      |                                 ^ TypeError: Cannot read properties of undefined (reading 'amount')
+  237 |     const sameAccount = activeUser.account1;
+  238 | 
+  239 |     Logger.info(`TC-UI-006: Arrange complete — amount=${transferAmount}, from=#${sameAccount}, to=#${sameAccount} (SAME account)`);
+  240 | 
+  241 |     await transferPage.navigate();
+  242 |     Logger.info('TC-UI-006: Navigated to Transfer Funds page');
+  243 | 
+  244 |     await transferPage.performTransfer(transferAmount, sameAccount, sameAccount);
+  245 |     Logger.info('TC-UI-006: Same-account transfer submitted via UI (from=to)');
+  246 | 
+  247 |   
+  248 |     let bugActive = false;
+  249 |     try {
+  250 |       await page.locator(TransferLocators.successMessageBody)
+  251 |         .waitFor({ state: 'visible', timeout: 5000 });
+  252 |       bugActive = true;
+  253 |       Logger.info('TC-UI-006: Success message appeared — bug DEF-FT-004 is ACTIVE');
+  254 |     } catch {
+  255 |       bugActive = false;
+  256 |       Logger.info('TC-UI-006: Success message did NOT appear — bug DEF-FT-004 may be FIXED');
+  257 |     }
+  258 | 
+  259 |     if (bugActive) {
+  260 |      
+  261 |       expect.soft(bugActive,
+  262 |         'DEF-FT-004 active: UI accepted same-account transfer (from=#' + sameAccount +
+  263 |         ' to=#' + sameAccount + ') and displayed confirmation page. ' +
+  264 |         'Phantom Debit+Credit transactions now pollute the audit trail. ' +
+  265 |         'Expected: UI should reject with "Source and destination accounts must be different".'
+  266 |       ).toBeTruthy();
+  267 | 
+  268 |       Logger.info('TC-UI-006: Soft assertion logged — DEF-FT-004 confirmed ACTIVE, phantom transactions created');
+  269 |     } else {
+  270 |       const errorVisible = await page
+  271 |         .locator(TransferLocators.errorMessage).last().isVisible().catch(() => false);
+  272 | 
+  273 |       expect.soft(errorVisible,
+  274 |         'DEF-FT-004 appears FIXED — same-account validation now correctly triggers an error message.'
+  275 |       ).toBeTruthy();
+  276 | 
+  277 |       Logger.info('TC-UI-006: Bug DEF-FT-004 appears FIXED — error message displayed correctly');
+  278 |     }
+  279 |     Logger.info(`TC-UI-006: COMPLETED — Same-account defect path finished, bug active: ${bugActive}`);
+  280 |   });
+  281 | });
+```

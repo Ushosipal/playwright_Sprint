@@ -1,0 +1,17 @@
+2026-05-17 13:45:07 [info]: Fixture: staggered start delay = 700 ms
+2026-05-17 13:45:08 [info]: Fixture: starting UI registration for username=qauser_1779005708307
+2026-05-17 13:45:08 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-17 13:45:09 [info]: RegisterPage: Submitting registration for username=qauser_1779005708307
+2026-05-17 13:45:19 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-17 13:45:19 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-17 13:45:20 [info]: AccountOverviewPage: Primary account captured: #156423
+2026-05-17 13:45:20 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-17 13:45:21 [info]: OpenAccountPage: Opening Savings account funded from #156423
+2026-05-17 13:45:22 [info]: OpenAccountPage: New account created: #156645
+2026-05-17 13:45:22 [info]: Fixture COMPLETE: user=qauser_1779005708307 account1=156423 account2=156645
+2026-05-17 13:45:22 [info]: TC-API-008: Executing same-account transfer via API (from=to) — expecting 4xx but known defect DEF-FT-004
+2026-05-17 13:45:22 [info]: TC-API-008: Arrange complete — amount=50, from=#156423, to=#156423 (SAME account)
+2026-05-17 13:45:22 [info]: TC-API-008: POST /transfer (from=to) returned HTTP 200
+2026-05-17 13:45:22 [info]: TC-API-008: Response body = "Successfully transferred $50 from account #156423 to account #156423"
+2026-05-17 13:45:22 [info]: TC-API-008: Soft assertion logged — DEF-FT-004 confirmed ACTIVE, phantom transactions created
+2026-05-17 13:45:22 [info]: TC-API-008: COMPLETED — Same-account defect path finished, status: 200

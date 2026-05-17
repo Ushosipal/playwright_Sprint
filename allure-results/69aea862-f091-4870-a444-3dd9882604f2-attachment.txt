@@ -1,0 +1,23 @@
+2026-05-16 19:47:18 [info]: Fixture: staggered start delay = 2284 ms
+2026-05-16 19:47:20 [info]: Fixture: starting UI registration for username=qauser_1778941040416
+2026-05-16 19:47:20 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 19:47:20 [info]: RegisterPage: Submitting registration for username=qauser_1778941040416
+2026-05-16 19:47:20 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 19:47:20 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 19:47:21 [info]: AccountOverviewPage: Primary account captured: #22335
+2026-05-16 19:47:21 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 19:47:21 [info]: OpenAccountPage: Opening Savings account funded from #22335
+2026-05-16 19:47:21 [info]: OpenAccountPage: New account created: #22446
+2026-05-16 19:47:21 [info]: Fixture COMPLETE: user=qauser_1778941040416 account1=22335 account2=22446
+2026-05-16 19:47:21 [info]: TC-E2E-003: Executing hybrid minimum boundary test — $0.01 transfer with API balance verification
+2026-05-16 19:47:21 [info]: TC-E2E-003: Arrange complete — amount=0.01, from=#22335, to=#22446
+2026-05-16 19:47:21 [info]: TC-E2E-003: Pre-transfer source balance = $415.5
+2026-05-16 19:47:21 [info]: TC-E2E-003: Pre-transfer destination balance = $100
+2026-05-16 19:47:21 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-16 19:47:21 [info]: TC-E2E-003: Navigated to Transfer Funds page
+2026-05-16 19:47:21 [info]: TransferFundsPage: Transferring $0.01: #22335 -> #22446
+2026-05-16 19:47:21 [info]: TC-E2E-003: Minimum boundary transfer ($0.01) submitted via UI
+2026-05-16 19:47:21 [info]: TC-E2E-003: UI confirmation page verified — "$0.01" transfer confirmed
+2026-05-16 19:47:21 [info]: TC-E2E-003: Post-transfer source balance = $415.49
+2026-05-16 19:47:21 [info]: TC-E2E-003: Post-transfer destination balance = $100.01
+2026-05-16 19:47:21 [info]: TC-E2E-003: PASSED — $0.01 boundary correctly reflected: source -$0.01, destination +$0.01

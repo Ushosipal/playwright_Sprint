@@ -1,0 +1,319 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transfer.ui.spec.ts >> UI Transfer Validations @ui >> TC-UI-003: Minimum boundary transfer of $0.01 via UI @regression @FR-05 @FR-09
+- Location: tests\ui\transfer.ui.spec.ts:77:7
+
+# Error details
+
+```
+Error: Fixture FATAL: User registration failed after 3 attempts. ParaBank may be returning "This username already exists" for every generated username, or the registration page is down. Worker=1, Test="TC-UI-003: Minimum boundary transfer of $0.01 via UI @regression @FR-05 @FR-09".
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link:
+        - /url: admin.htm
+        - img [ref=e4] [cursor=pointer]
+      - link "ParaBank":
+        - /url: index.htm
+        - img "ParaBank" [ref=e5] [cursor=pointer]
+      - paragraph [ref=e6]: Experience the difference
+    - generic [ref=e7]:
+      - list [ref=e8]:
+        - listitem [ref=e9]: Solutions
+        - listitem [ref=e10]:
+          - link "About Us" [ref=e11] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e12]:
+          - link "Services" [ref=e13] [cursor=pointer]:
+            - /url: services.htm
+        - listitem [ref=e14]:
+          - link "Products" [ref=e15] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/products.jsp
+        - listitem [ref=e16]:
+          - link "Locations" [ref=e17] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - listitem [ref=e18]:
+          - link "Admin Page" [ref=e19] [cursor=pointer]:
+            - /url: admin.htm
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "home" [ref=e22] [cursor=pointer]:
+            - /url: index.htm
+        - listitem [ref=e23]:
+          - link "about" [ref=e24] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e25]:
+          - link "contact" [ref=e26] [cursor=pointer]:
+            - /url: contact.htm
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - heading "Customer Login" [level=2] [ref=e29]
+        - generic [ref=e30]:
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: Username
+            - textbox [active] [ref=e34]
+            - paragraph [ref=e35]: Password
+            - textbox [ref=e37]
+            - button "Log In" [ref=e39] [cursor=pointer]
+          - paragraph [ref=e40]:
+            - link "Forgot login info?" [ref=e41] [cursor=pointer]:
+              - /url: lookup.htm
+          - paragraph [ref=e42]:
+            - link "Register" [ref=e43] [cursor=pointer]:
+              - /url: register.htm
+      - generic [ref=e44]:
+        - heading "Signing up is easy!" [level=1] [ref=e45]
+        - paragraph [ref=e46]: If you have an account with us you can sign-up for free instant online access. You will have to provide some personal information.
+        - table [ref=e48]:
+          - rowgroup [ref=e49]:
+            - 'row "First Name: Sudip" [ref=e50]':
+              - cell "First Name:" [ref=e51]
+              - cell "Sudip" [ref=e52]:
+                - textbox [ref=e53]: Sudip
+              - cell [ref=e54]
+            - 'row "Last Name: Chel" [ref=e55]':
+              - cell "Last Name:" [ref=e56]
+              - cell "Chel" [ref=e57]:
+                - textbox [ref=e58]: Chel
+              - cell [ref=e59]
+            - 'row "Address: 123 Test Lane" [ref=e60]':
+              - cell "Address:" [ref=e61]
+              - cell "123 Test Lane" [ref=e62]:
+                - textbox [ref=e63]: 123 Test Lane
+              - cell [ref=e64]
+            - 'row "City: Techville" [ref=e65]':
+              - cell "City:" [ref=e66]
+              - cell "Techville" [ref=e67]:
+                - textbox [ref=e68]: Techville
+              - cell [ref=e69]
+            - 'row "State: TS" [ref=e70]':
+              - cell "State:" [ref=e71]
+              - cell "TS" [ref=e72]:
+                - textbox [ref=e73]: TS
+              - cell [ref=e74]
+            - 'row "Zip Code: 12345789" [ref=e75]':
+              - cell "Zip Code:" [ref=e76]
+              - cell "12345789" [ref=e77]:
+                - textbox [ref=e78]: "12345789"
+              - cell [ref=e79]
+            - 'row "Phone #: 555-0199" [ref=e80]':
+              - 'cell "Phone #:" [ref=e81]'
+              - cell "555-0199" [ref=e82]:
+                - textbox [ref=e83]: 555-0199
+              - cell [ref=e84]
+            - 'row "SSN: SSN-940603435" [ref=e85]':
+              - cell "SSN:" [ref=e86]
+              - cell "SSN-940603435" [ref=e87]:
+                - textbox [ref=e88]: SSN-940603435
+              - cell [ref=e89]
+            - row [ref=e90]:
+              - cell [ref=e91]
+            - 'row "Username: qa_1_1778940603215_2_92662 This username already exists." [ref=e92]':
+              - cell "Username:" [ref=e93]
+              - cell "qa_1_1778940603215_2_92662" [ref=e94]:
+                - textbox [ref=e95]: qa_1_1778940603215_2_92662
+              - cell "This username already exists." [ref=e96]
+            - row "Password:" [ref=e97]:
+              - cell "Password:" [ref=e98]
+              - cell [ref=e99]:
+                - textbox [ref=e100]
+              - cell [ref=e101]
+            - row "Confirm:" [ref=e102]:
+              - cell "Confirm:" [ref=e103]
+              - cell [ref=e104]:
+                - textbox [ref=e105]
+              - cell [ref=e106]
+            - row "Register" [ref=e107]:
+              - cell [ref=e108]
+              - cell "Register" [ref=e109]:
+                - button "Register" [ref=e110] [cursor=pointer]
+  - generic [ref=e112]:
+    - list [ref=e113]:
+      - listitem [ref=e114]:
+        - link "Home" [ref=e115] [cursor=pointer]:
+          - /url: index.htm
+        - text: "|"
+      - listitem [ref=e116]:
+        - link "About Us" [ref=e117] [cursor=pointer]:
+          - /url: about.htm
+        - text: "|"
+      - listitem [ref=e118]:
+        - link "Services" [ref=e119] [cursor=pointer]:
+          - /url: services.htm
+        - text: "|"
+      - listitem [ref=e120]:
+        - link "Products" [ref=e121] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/products.jsp
+        - text: "|"
+      - listitem [ref=e122]:
+        - link "Locations" [ref=e123] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - text: "|"
+      - listitem [ref=e124]:
+        - link "Forum" [ref=e125] [cursor=pointer]:
+          - /url: http://forums.parasoft.com/
+        - text: "|"
+      - listitem [ref=e126]:
+        - link "Site Map" [ref=e127] [cursor=pointer]:
+          - /url: sitemap.htm
+        - text: "|"
+      - listitem [ref=e128]:
+        - link "Contact Us" [ref=e129] [cursor=pointer]:
+          - /url: contact.htm
+    - paragraph [ref=e130]: © Parasoft. All rights reserved.
+    - list [ref=e131]:
+      - listitem [ref=e132]: "Visit us at:"
+      - listitem [ref=e133]:
+        - link "www.parasoft.com" [ref=e134] [cursor=pointer]:
+          - /url: http://www.parasoft.com/
+```
+
+# Test source
+
+```ts
+  170 |   return { success: false, reason: 'Unexpected registration page state' };
+  171 | }
+  172 | 
+  173 | export const test = base.extend<TestFixtures>({
+  174 | 
+  175 |   /**
+  176 |    * Auto-screenshot fixture — `auto: true` makes Playwright invoke it for
+  177 |    * every test in this `test` extension without explicit injection.
+  178 |    *
+  179 |    * The screenshot is taken AFTER the test body has run (note the use(... )
+  180 |    * call sits before the capture logic). testInfo.status carries the
+  181 |    * pass/fail verdict at that point.
+  182 |    */
+  183 |   autoScreenshot: [async ({ page }, use, testInfo) => {
+  184 |     await use();
+  185 |     const label = testInfo.status === 'passed' ? 'pass'
+  186 |                 : testInfo.status === 'failed' ? 'fail'
+  187 |                 : testInfo.status === 'timedOut' ? 'timeout'
+  188 |                 : 'end';
+  189 |     await captureScreenshot(page, testInfo, label);
+  190 |   }, { auto: true }],
+  191 | 
+  192 |   // ----- Thin POM fixtures -----
+  193 |   registerPage: async ({ page }, use) => {
+  194 |     await use(new RegisterPage(page));
+  195 |   },
+  196 |   openAccountPage: async ({ page }, use) => {
+  197 |     await use(new OpenAccountPage(page));
+  198 |   },
+  199 |   accountOverviewPage: async ({ page }, use) => {
+  200 |     await use(new AccountOverviewPage(page));
+  201 |   },
+  202 |   transferPage: async ({ page }, use) => {
+  203 |     await use(new TransferFundsPage(page));
+  204 |   },
+  205 | 
+  206 |   /**
+  207 |    * Provisions a fresh user via UI, opens a second account, and hands the
+  208 |    * authenticated context to the test. The browser session (with JSESSIONID)
+  209 |    * is reused for both UI and API calls within the test.
+  210 |    *
+  211 |    * Stability improvements over the original:
+  212 |    *  - Username = timestamp + workerIndex + counter + random (collision-proof)
+  213 |    *  - SSN = unique per attempt (avoids SSN-level duplicate rejection)
+  214 |    *  - Retry loop: up to 3 attempts if "This username already exists" detected
+  215 |    *  - Explicit form-readiness wait before filling
+  216 |    *  - Clear logging at every decision point
+  217 |    */
+  218 |   activeUser: async (
+  219 |     { registerPage, openAccountPage, accountOverviewPage },
+  220 |     use,
+  221 |     testInfo
+  222 |   ) => {
+  223 |     // 1. Defensive stagger
+  224 |     await staggeredStart();
+  225 | 
+  226 |     // 2. Registration with retry loop
+  227 |     const password = 'Password_123';
+  228 |     const workerIndex = testInfo.workerIndex;
+  229 |     let registeredUsername = '';
+  230 | 
+  231 |     for (let attempt = 1; attempt <= MAX_REGISTRATION_RETRIES; attempt++) {
+  232 |       const candidateUsername = generateUniqueUsername(workerIndex);
+  233 |       const candidateSSN = generateUniqueSSN();
+  234 | 
+  235 |       Logger.info(
+  236 |         `Fixture: Registration attempt ${attempt}/${MAX_REGISTRATION_RETRIES} — ` +
+  237 |         `username="${candidateUsername}", ssn="${candidateSSN}", worker=${workerIndex}`
+  238 |       );
+  239 | 
+  240 |       const result = await attemptRegistration(
+  241 |         registerPage,
+  242 |         candidateUsername,
+  243 |         password,
+  244 |         candidateSSN
+  245 |       );
+  246 | 
+  247 |       if (result.success) {
+  248 |         registeredUsername = result.username;
+  249 |         break;
+  250 |       }
+  251 | 
+  252 |       // Registration failed — log the reason
+  253 |       Logger.warn(
+  254 |         `Fixture: Attempt ${attempt} failed — reason: "${result.reason}". ` +
+  255 |         (attempt < MAX_REGISTRATION_RETRIES
+  256 |           ? `Retrying with a new username...`
+  257 |           : `No retries remaining.`)
+  258 |       );
+  259 | 
+  260 |       // Brief pause before retry to let ParaBank's DB settle
+  261 |       if (attempt < MAX_REGISTRATION_RETRIES) {
+  262 |         const retryDelayMs = 1000 + Math.floor(Math.random() * 2000);
+  263 |         Logger.info(`Fixture: Waiting ${retryDelayMs}ms before retry...`);
+  264 |         await new Promise(resolve => setTimeout(resolve, retryDelayMs));
+  265 |       }
+  266 |     }
+  267 | 
+  268 |     // 3. If all retries exhausted, fail loudly
+  269 |     if (!registeredUsername) {
+> 270 |       throw new Error(
+      |             ^ Error: Fixture FATAL: User registration failed after 3 attempts. ParaBank may be returning "This username already exists" for every generated username, or the registration page is down. Worker=1, Test="TC-UI-003: Minimum boundary transfer of $0.01 via UI @regression @FR-05 @FR-09".
+  271 |         `Fixture FATAL: User registration failed after ${MAX_REGISTRATION_RETRIES} attempts. ` +
+  272 |         `ParaBank may be returning "This username already exists" for every generated username, ` +
+  273 |         `or the registration page is down. Worker=${workerIndex}, Test="${testInfo.title}".`
+  274 |       );
+  275 |     }
+  276 | 
+  277 |     Logger.info(`Fixture: Registration confirmed — user="${registeredUsername}"`);
+  278 | 
+  279 |     // 4. Capture primary account from overview
+  280 |     await accountOverviewPage.navigate();
+  281 |     const account1 = await accountOverviewPage.getPrimaryAccountId();
+  282 |     Logger.info(`Fixture: Primary account captured — #${account1}`);
+  283 | 
+  284 |     // 5. Open a second (Savings) account funded from account1
+  285 |     await openAccountPage.navigate();
+  286 |     const account2 = await openAccountPage.openNewAccount(
+  287 |       AccountType.SAVINGS,
+  288 |       account1
+  289 |     );
+  290 |     Logger.info(`Fixture: Secondary account opened — #${account2}`);
+  291 | 
+  292 |     Logger.info(
+  293 |       `Fixture COMPLETE: user=${registeredUsername} account1=${account1} account2=${account2}`
+  294 |     );
+  295 | 
+  296 |     // 6. Hand-off — JSESSIONID cookies stay attached to `page` and
+  297 |     //    propagate to page.request and the dedicated `request` fixture.
+  298 |     await use({ username: registeredUsername, password, account1, account2 });
+  299 |   }
+  300 | });
+  301 | 
+  302 | export { expect };
+```

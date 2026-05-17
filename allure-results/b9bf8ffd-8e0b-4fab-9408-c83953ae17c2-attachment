@@ -1,0 +1,281 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transfer_rapi_click.spec.ts >> TC-UI-08: Rapid Click Duplicate Prevention @ui @defects @FR-05 @FR-07 >> TC-UI-08: Rapid clicks should produce only one transfer (DEF-006)
+- Location: tests\ui\transfer_rapi_click.spec.ts:46:7
+
+# Error details
+
+```
+Error: DEF-006 active: Transfer button did NOT disable after first click (allowed 4 consecutive clicks).
+
+expect(received).toBeTruthy()
+
+Received: false
+```
+
+```
+Error: DEF-006 active: Expected exactly 1 debit of $25. Actual: 4 debit(s) totaling $100.00 (source went from $415.5 to $315.5).
+
+expect(received).toBeCloseTo(expected, precision)
+
+Expected: 390.5
+Received: 315.5
+
+Expected precision:    2
+Expected difference: < 0.005
+Received difference:   75
+```
+
+```
+Error: DEF-006 active: Target #14010 credited 4 time(s) instead of 1.
+
+expect(received).toBeCloseTo(expected, precision)
+
+Expected: 125
+Received: 200
+
+Expected precision:    2
+Expected difference: < 0.005
+Received difference:   75
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link:
+        - /url: admin.htm
+        - img [ref=e4] [cursor=pointer]
+      - link "ParaBank":
+        - /url: index.htm
+        - img "ParaBank" [ref=e5] [cursor=pointer]
+      - paragraph [ref=e6]: Experience the difference
+    - generic [ref=e7]:
+      - list [ref=e8]:
+        - listitem [ref=e9]: Solutions
+        - listitem [ref=e10]:
+          - link "About Us" [ref=e11] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e12]:
+          - link "Services" [ref=e13] [cursor=pointer]:
+            - /url: services.htm
+        - listitem [ref=e14]:
+          - link "Products" [ref=e15] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/products.jsp
+        - listitem [ref=e16]:
+          - link "Locations" [ref=e17] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - listitem [ref=e18]:
+          - link "Admin Page" [ref=e19] [cursor=pointer]:
+            - /url: admin.htm
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "home" [ref=e22] [cursor=pointer]:
+            - /url: index.htm
+        - listitem [ref=e23]:
+          - link "about" [ref=e24] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e25]:
+          - link "contact" [ref=e26] [cursor=pointer]:
+            - /url: contact.htm
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: Welcome Sudip Chel
+        - heading "Account Services" [level=2] [ref=e30]
+        - list [ref=e31]:
+          - listitem [ref=e32]:
+            - link "Open New Account" [ref=e33] [cursor=pointer]:
+              - /url: openaccount.htm
+          - listitem [ref=e34]:
+            - link "Accounts Overview" [ref=e35] [cursor=pointer]:
+              - /url: overview.htm
+          - listitem [ref=e36]:
+            - link "Transfer Funds" [ref=e37] [cursor=pointer]:
+              - /url: transfer.htm
+          - listitem [ref=e38]:
+            - link "Bill Pay" [ref=e39] [cursor=pointer]:
+              - /url: billpay.htm
+          - listitem [ref=e40]:
+            - link "Find Transactions" [ref=e41] [cursor=pointer]:
+              - /url: findtrans.htm
+          - listitem [ref=e42]:
+            - link "Update Contact Info" [ref=e43] [cursor=pointer]:
+              - /url: updateprofile.htm
+          - listitem [ref=e44]:
+            - link "Request Loan" [ref=e45] [cursor=pointer]:
+              - /url: requestloan.htm
+          - listitem [ref=e46]:
+            - link "Log Out" [ref=e47] [cursor=pointer]:
+              - /url: logout.htm
+      - generic [ref=e50]:
+        - heading "Transfer Complete!" [level=1] [ref=e51]
+        - paragraph [ref=e52]: "$25.00 has been transferred from account #13899 to account #14010."
+        - paragraph [ref=e53]: See Account Activity for more details.
+  - generic [ref=e55]:
+    - list [ref=e56]:
+      - listitem [ref=e57]:
+        - link "Home" [ref=e58] [cursor=pointer]:
+          - /url: index.htm
+        - text: "|"
+      - listitem [ref=e59]:
+        - link "About Us" [ref=e60] [cursor=pointer]:
+          - /url: about.htm
+        - text: "|"
+      - listitem [ref=e61]:
+        - link "Services" [ref=e62] [cursor=pointer]:
+          - /url: services.htm
+        - text: "|"
+      - listitem [ref=e63]:
+        - link "Products" [ref=e64] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/products.jsp
+        - text: "|"
+      - listitem [ref=e65]:
+        - link "Locations" [ref=e66] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - text: "|"
+      - listitem [ref=e67]:
+        - link "Forum" [ref=e68] [cursor=pointer]:
+          - /url: http://forums.parasoft.com/
+        - text: "|"
+      - listitem [ref=e69]:
+        - link "Site Map" [ref=e70] [cursor=pointer]:
+          - /url: sitemap.htm
+        - text: "|"
+      - listitem [ref=e71]:
+        - link "Contact Us" [ref=e72] [cursor=pointer]:
+          - /url: contact.htm
+    - paragraph [ref=e73]: © Parasoft. All rights reserved.
+    - list [ref=e74]:
+      - listitem [ref=e75]: "Visit us at:"
+      - listitem [ref=e76]:
+        - link "www.parasoft.com" [ref=e77] [cursor=pointer]:
+          - /url: http://www.parasoft.com/
+```
+
+# Test source
+
+```ts
+  18  |  *   C. Only ONE debit reflected in balance (source delta == single amount)
+  19  |  *
+  20  |  * Observed ParaBank behavior (DEF-006):
+  21  |  *   - Button stays enabled; multiple debits actually occur.
+  22  |  */
+  23  | import { test, expect } from '../../fixtures/base-fixture';
+  24  | import { TransferLocators } from '../../locators/transfer.locator';
+  25  | import { APIRequestContext } from '@playwright/test';
+  26  | import { ApiLogger, Logger } from '../../utils/logger';
+  27  | 
+  28  | test.describe('TC-UI-08: Rapid Click Duplicate Prevention @ui @defects @FR-05 @FR-07', () => {
+  29  | 
+  30  |   /**
+  31  |    * Fetch balance via authenticated API call. Uses the `request` fixture
+  32  |    * which inherits the JSESSIONID from the UI registration in base-fixture.
+  33  |    */
+  34  |   const fetchBalance = async (request: APIRequestContext, accountId: string): Promise<number> => {
+  35  |     const res = await request.get(`/parabank/services/bank/accounts/${accountId}`, {
+  36  |       headers: { 'Accept': 'application/json' }
+  37  |     });
+  38  |     if (res.status() !== 200) {
+  39  |       throw new Error(`Balance fetch for #${accountId} returned HTTP ${res.status()}`);
+  40  |     }
+  41  |     const data = await res.json();
+  42  |     ApiLogger.info({ endpoint: `/accounts/${accountId}`, balance: data.balance });
+  43  |     return parseFloat(data.balance);
+  44  |   };
+  45  | 
+  46  |   test('TC-UI-08: Rapid clicks should produce only one transfer (DEF-006)',
+  47  |     async ({ transferPage, activeUser, page, request }) => {
+  48  | 
+  49  |     // Annotations
+  50  |     test.info().annotations.push({ type: 'Test Type', description: 'UI Hybrid (Rapid-Click)' });
+  51  |     test.info().annotations.push({ type: 'Known Bug', description: 'DEF-006' });
+  52  |     test.info().annotations.push({ type: 'Requirement', description: 'FR-05, FR-07' });
+  53  | 
+  54  |     // Constants
+  55  |     const TRANSFER_AMOUNT = 25;
+  56  |     const CLICK_COUNT = 4;
+  57  |     const EXPECTED_SINGLE_DELTA = TRANSFER_AMOUNT; // only one debit should occur
+  58  | 
+  59  |     // 1. Capture pre-transfer balances via API
+  60  |     const preSource = await fetchBalance(request, activeUser.account1);
+  61  |     const preTarget = await fetchBalance(request, activeUser.account2);
+  62  |     Logger.info(`TC-UI-08: pre-balance source=$${preSource} target=$${preTarget}`);
+  63  | 
+  64  |     // 2. Navigate and fill form (DO NOT submit yet)
+  65  |     await transferPage.navigate();
+  66  |     await transferPage.fillTransferForm(
+  67  |       String(TRANSFER_AMOUNT),
+  68  |       activeUser.account1,
+  69  |       activeUser.account2
+  70  |     );
+  71  | 
+  72  |     // 3. Rapid-fire CLICK_COUNT clicks via dispatchEvent
+  73  |     await transferPage.rapidClickTransfer(CLICK_COUNT);
+  74  |     Logger.info(`TC-UI-08: ${CLICK_COUNT} rapid clicks fired`);
+  75  | 
+  76  |     // 4. Wait for processing to settle
+  77  |     try {
+  78  |       await page.locator(TransferLocators.successMessageBody)
+  79  |         .waitFor({ state: 'visible', timeout: 10_000 });
+  80  |     } catch {
+  81  |       Logger.warn('TC-UI-08: Success message did not appear within 10s');
+  82  |     }
+  83  |     // Extra settle so any in-flight duplicate POSTs resolve server-side
+  84  |     await page.waitForTimeout(3_000);
+  85  | 
+  86  |     // 5. Capture post-transfer balances
+  87  |     const postSource = await fetchBalance(request, activeUser.account1);
+  88  |     const postTarget = await fetchBalance(request, activeUser.account2);
+  89  |     Logger.info(`TC-UI-08: post-balance source=$${postSource} target=$${postTarget}`);
+  90  | 
+  91  |     const sourceDelta = preSource - postSource;
+  92  |     const debitCount = Math.round(sourceDelta / TRANSFER_AMOUNT);
+  93  |     Logger.info(`TC-UI-08: source delta=$${sourceDelta.toFixed(2)} (~${debitCount} debits)`);
+  94  | 
+  95  |     // 6. Three soft assertions — pipeline stays green, defect is documented
+  96  | 
+  97  |     // Assertion A: button should have been disabled after first click
+  98  |     const buttonDisabled = await page
+  99  |       .locator(TransferLocators.transferButton)
+  100 |       .isDisabled()
+  101 |       .catch(() => false);
+  102 |     expect.soft(buttonDisabled,
+  103 |       `DEF-006 active: Transfer button did NOT disable after first click ` +
+  104 |       `(allowed ${CLICK_COUNT} consecutive clicks).`
+  105 |     ).toBeTruthy();
+  106 | 
+  107 |     // Assertion B: source debited EXACTLY once
+  108 |     expect.soft(postSource,
+  109 |       `DEF-006 active: Expected exactly 1 debit of $${EXPECTED_SINGLE_DELTA}. ` +
+  110 |       `Actual: ${debitCount} debit(s) totaling $${sourceDelta.toFixed(2)} ` +
+  111 |       `(source went from $${preSource} to $${postSource}).`
+  112 |     ).toBeCloseTo(preSource - EXPECTED_SINGLE_DELTA, 2);
+  113 | 
+  114 |     // Assertion C: target credited EXACTLY once
+  115 |     expect.soft(postTarget,
+  116 |       `DEF-006 active: Target #${activeUser.account2} credited ` +
+  117 |       `${debitCount} time(s) instead of 1.`
+> 118 |     ).toBeCloseTo(preTarget + EXPECTED_SINGLE_DELTA, 2);
+      |       ^ Error: DEF-006 active: Target #14010 credited 4 time(s) instead of 1.
+  119 | 
+  120 |     // Defect summary in log
+  121 |     const softErrors = test.info().errors;
+  122 |     if (softErrors.length > 0) {
+  123 |       Logger.warn(
+  124 |         `TC-UI-08 summary: ${softErrors.length} soft assertion(s) failed — ` +
+  125 |         `DEF-006 confirmed active (${debitCount} duplicate transfers processed).`
+  126 |       );
+  127 |     } else {
+  128 |       Logger.info(`TC-UI-08 summary: All assertions passed — DEF-006 appears FIXED.`);
+  129 |     }
+  130 |   });
+  131 | });
+```

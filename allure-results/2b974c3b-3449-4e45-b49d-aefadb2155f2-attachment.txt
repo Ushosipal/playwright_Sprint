@@ -1,0 +1,28 @@
+2026-05-17 00:56:36 [info]: Fixture: staggered start delay = 1099 ms
+2026-05-17 00:56:37 [info]: Fixture: starting UI registration for username=qauser_1778959597424
+2026-05-17 00:56:37 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-17 00:56:37 [info]: RegisterPage: Submitting registration for username=qauser_1778959597424
+2026-05-17 00:56:38 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-17 00:56:38 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-17 00:56:38 [info]: AccountOverviewPage: Primary account captured: #139329
+2026-05-17 00:56:38 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-17 00:56:38 [info]: OpenAccountPage: Opening Savings account funded from #139329
+2026-05-17 00:56:38 [info]: OpenAccountPage: New account created: #139440
+2026-05-17 00:56:38 [info]: Fixture COMPLETE: user=qauser_1778959597424 account1=139329 account2=139440
+2026-05-17 00:56:38 [info]: TC-E2E-004: Executing full end-to-end flow - login, UI transfer, API balance and history verification
+2026-05-17 00:56:38 [info]: TC-E2E-004: Arrange complete — user=qauser_1778959597424, amount=200, from=#139329, to=#139440
+2026-05-17 00:56:38 [info]: TC-E2E-004: Step 1 — User "qauser_1778959597424" logged in via base fixture with JSESSIONID
+2026-05-17 00:56:38 [info]: TC-E2E-004: Step 2a — Pre-transfer source balance = $415.5
+2026-05-17 00:56:38 [info]: TC-E2E-004: Step 2b — Pre-transfer destination balance = $100
+2026-05-17 00:56:38 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-17 00:56:38 [info]: TC-E2E-004: Step 3a — Navigated to Transfer Funds page
+2026-05-17 00:56:38 [info]: TransferFundsPage: Transferring $200: #139329 -> #139440
+2026-05-17 00:56:39 [info]: TC-E2E-004: Step 3b — Transfer of $200 submitted via UI
+2026-05-17 00:56:39 [info]: TC-E2E-004: Step 4a - UI confirmation page verified — "Transfer Complete!" displayed
+2026-05-17 00:56:39 [info]: TC-E2E-004: Step 4b - Confirmation text verified: contains $200.00, #139329, #139440
+2026-05-17 00:56:39 [info]: TC-E2E-004: Step 5a - Post-transfer source balance = $215.5
+2026-05-17 00:56:39 [info]: TC-E2E-004: Step 5b — Post-transfer destination balance = $300
+2026-05-17 00:56:39 [info]: TC-E2E-004: Step 5c - Balance deltas verified: source -$200, dest +$200
+2026-05-17 00:56:39 [info]: TC-E2E-004: Step 6a — Debit transaction of $200 found in source history
+2026-05-17 00:56:39 [info]: TC-E2E-004: Step 7a — Credit transaction of $200 found in destination history
+2026-05-17 00:56:39 [info]: TC-E2E-004: PASSED — Full E2E flow verified: login , UI transfer , confirmation message , balance deltas , transaction history 

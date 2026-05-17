@@ -1,0 +1,18 @@
+2026-05-16 21:43:09 [info]: Fixture: staggered start delay = 2093 ms
+2026-05-16 21:43:11 [info]: Fixture: starting UI registration for username=qauser_1778947991542
+2026-05-16 21:43:11 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 21:43:12 [info]: RegisterPage: Submitting registration for username=qauser_1778947991542
+2026-05-16 21:43:16 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 21:43:16 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 21:43:16 [info]: AccountOverviewPage: Primary account captured: #38763
+2026-05-16 21:43:16 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 21:43:17 [info]: OpenAccountPage: Opening Savings account funded from #38763
+2026-05-16 21:43:18 [info]: OpenAccountPage: New account created: #38985
+2026-05-16 21:43:18 [info]: Fixture COMPLETE: user=qauser_1778947991542 account1=38763 account2=38985
+2026-05-16 21:43:18 [info]: TC-API-007: Executing insufficient-funds transfer via API — expecting 4xx but known defect DEF-FT-001
+2026-05-16 21:43:18 [info]: TC-API-007: Arrange complete — overdraft amount=999999, from=#38763, to=#38985
+2026-05-16 21:43:18 [info]: TC-API-007: Pre-transfer source balance = $415.5 (attempting to transfer $999999)
+2026-05-16 21:43:18 [info]: TC-API-007: POST /transfer returned HTTP 200
+2026-05-16 21:43:18 [info]: TC-API-007: Post-transfer source balance = $-999583.5 (was $415.5)
+2026-05-16 21:43:18 [info]: TC-API-007: Soft assertion logged — DEF-FT-001 confirmed ACTIVE, balance went negative
+2026-05-16 21:43:18 [info]: TC-API-007: COMPLETED — Insufficient-funds defect path finished, status: 200

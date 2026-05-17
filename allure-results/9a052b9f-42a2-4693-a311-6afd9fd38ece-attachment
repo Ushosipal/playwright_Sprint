@@ -1,0 +1,346 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: api\transferAPI.spec.ts >> API Transfer Validations @api >> TC-API-003: Destination account balance is credited correctly via API @regression @FR-06
+- Location: tests\api\transferAPI.spec.ts:124:7
+
+# Error details
+
+```
+Error: POST /transfer should return HTTP 200
+
+expect(received).toBe(expected) // Object.is equality
+
+Expected: 200
+Received: 400
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link:
+        - /url: admin.htm
+        - img [ref=e4] [cursor=pointer]
+      - link "ParaBank":
+        - /url: index.htm
+        - img "ParaBank" [ref=e5] [cursor=pointer]
+      - paragraph [ref=e6]: Experience the difference
+    - generic [ref=e7]:
+      - list [ref=e8]:
+        - listitem [ref=e9]: Solutions
+        - listitem [ref=e10]:
+          - link "About Us" [ref=e11] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e12]:
+          - link "Services" [ref=e13] [cursor=pointer]:
+            - /url: services.htm
+        - listitem [ref=e14]:
+          - link "Products" [ref=e15] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/products.jsp
+        - listitem [ref=e16]:
+          - link "Locations" [ref=e17] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - listitem [ref=e18]:
+          - link "Admin Page" [ref=e19] [cursor=pointer]:
+            - /url: admin.htm
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "home" [ref=e22] [cursor=pointer]:
+            - /url: index.htm
+        - listitem [ref=e23]:
+          - link "about" [ref=e24] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e25]:
+          - link "contact" [ref=e26] [cursor=pointer]:
+            - /url: contact.htm
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: Welcome Ushosi Pal
+        - heading "Account Services" [level=2] [ref=e30]
+        - list [ref=e31]:
+          - listitem [ref=e32]:
+            - link "Open New Account" [ref=e33] [cursor=pointer]:
+              - /url: openaccount.htm
+          - listitem [ref=e34]:
+            - link "Accounts Overview" [ref=e35] [cursor=pointer]:
+              - /url: overview.htm
+          - listitem [ref=e36]:
+            - link "Transfer Funds" [ref=e37] [cursor=pointer]:
+              - /url: transfer.htm
+          - listitem [ref=e38]:
+            - link "Bill Pay" [ref=e39] [cursor=pointer]:
+              - /url: billpay.htm
+          - listitem [ref=e40]:
+            - link "Find Transactions" [ref=e41] [cursor=pointer]:
+              - /url: findtrans.htm
+          - listitem [ref=e42]:
+            - link "Update Contact Info" [ref=e43] [cursor=pointer]:
+              - /url: updateprofile.htm
+          - listitem [ref=e44]:
+            - link "Request Loan" [ref=e45] [cursor=pointer]:
+              - /url: requestloan.htm
+          - listitem [ref=e46]:
+            - link "Log Out" [ref=e47] [cursor=pointer]:
+              - /url: logout.htm
+      - generic [ref=e50]:
+        - heading "Account Opened!" [level=1] [ref=e51]
+        - paragraph [ref=e52]: Congratulations, your account is now open.
+        - paragraph [ref=e53]:
+          - text: "Your new account number:"
+          - link "96372" [ref=e54] [cursor=pointer]:
+            - /url: activity.htm?id=96372
+  - generic [ref=e56]:
+    - list [ref=e57]:
+      - listitem [ref=e58]:
+        - link "Home" [ref=e59] [cursor=pointer]:
+          - /url: index.htm
+        - text: "|"
+      - listitem [ref=e60]:
+        - link "About Us" [ref=e61] [cursor=pointer]:
+          - /url: about.htm
+        - text: "|"
+      - listitem [ref=e62]:
+        - link "Services" [ref=e63] [cursor=pointer]:
+          - /url: services.htm
+        - text: "|"
+      - listitem [ref=e64]:
+        - link "Products" [ref=e65] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/products.jsp
+        - text: "|"
+      - listitem [ref=e66]:
+        - link "Locations" [ref=e67] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - text: "|"
+      - listitem [ref=e68]:
+        - link "Forum" [ref=e69] [cursor=pointer]:
+          - /url: http://forums.parasoft.com/
+        - text: "|"
+      - listitem [ref=e70]:
+        - link "Site Map" [ref=e71] [cursor=pointer]:
+          - /url: sitemap.htm
+        - text: "|"
+      - listitem [ref=e72]:
+        - link "Contact Us" [ref=e73] [cursor=pointer]:
+          - /url: contact.htm
+    - paragraph [ref=e74]: © Parasoft. All rights reserved.
+    - list [ref=e75]:
+      - listitem [ref=e76]: "Visit us at:"
+      - listitem [ref=e77]:
+        - link "www.parasoft.com" [ref=e78] [cursor=pointer]:
+          - /url: http://www.parasoft.com/
+```
+
+# Test source
+
+```ts
+  66  |     Logger.info(`TC-API-001: Post-transfer source balance = $${postSourceBalance}`);
+  67  | 
+  68  |     expect(postSourceBalance,
+  69  |       `FR-06: Source #${sourceAccount} should be debited by exactly $${parsedAmount}. ` +
+  70  |       `Pre=$${preSourceBalance}, Post=$${postSourceBalance}, Expected post=$${preSourceBalance - parsedAmount}`
+  71  |     ).toBeCloseTo(preSourceBalance - parsedAmount, 2);
+  72  | 
+  73  |     Logger.info(`TC-API-001: PASSED — Source debited correctly: $${preSourceBalance} → $${postSourceBalance} (delta = -$${parsedAmount})`);
+  74  |   });
+  75  | 
+  76  | 
+  77  | 
+  78  | //2
+  79  |   test('TC-API-002: POST /transfer returns HTTP 200 for a valid transfer @smoke @FR-06', async ({ activeUser, page }) => {
+  80  |     Logger.info('TC-API-002: Verifying POST /transfer returns HTTP 200 with success body for valid request');
+  81  | 
+  82  |     
+  83  |     test.info().annotations.push({ type: 'Test Type', description: 'API' });
+  84  |     test.info().annotations.push({ type: 'Scenario', description: 'TS-FT-03' });
+  85  |     test.info().annotations.push({ type: 'Requirement', description: 'FR-06' });
+  86  |     test.info().annotations.push({ type: 'Doc Status', description: 'Pass' });
+  87  | 
+  88  |     const data = apiData.find(d => d.testCaseId === 'TC-API-01')!;
+  89  |     const transferAmount = data.amount;
+  90  |     const sourceAccount = activeUser.account1;
+  91  |     const destinationAccount = activeUser.account2;
+  92  | 
+  93  |     Logger.info(`TC-API-002: Arrange complete — amount=${transferAmount}, from=#${sourceAccount}, to=#${destinationAccount}`);
+  94  | 
+  95  |     const transferRes = await page.request.post(`/parabank/services/bank/transfer`, {
+  96  |       params: {
+  97  |         fromAccountId: sourceAccount,
+  98  |         toAccountId: destinationAccount,
+  99  |         amount: transferAmount
+  100 |       },
+  101 |       headers: { 'Accept': 'application/json' }
+  102 |     });
+  103 |     const transferBody = await transferRes.text();
+  104 |     const transferStatus = transferRes.status();
+  105 |     ApiLogger.info({ testCase: 'TC-API-002', endpoint: '/transfer', status: transferStatus, response: transferBody.substring(0, 500) });
+  106 | 
+  107 |     Logger.info(`TC-API-002: POST /transfer returned HTTP ${transferStatus}`);
+  108 |     Logger.info(`TC-API-002: Response body = "${transferBody.substring(0, 200)}"`);
+  109 | 
+  110 |  
+  111 |     expect(transferStatus,
+  112 |       `Expected HTTP 200 for valid transfer, got HTTP ${transferStatus}`
+  113 |     ).toBe(200);
+  114 | 
+  115 |     expect(transferBody,
+  116 |       'Response body should contain success message referencing transferred amount'
+  117 |     ).toContain('Successfully transferred');
+  118 | 
+  119 |     Logger.info('TC-API-002: PASSED — POST /transfer returned HTTP 200 with valid success body');
+  120 |   });
+  121 | 
+  122 |   
+  123 |   // 3
+  124 |   test('TC-API-003: Destination account balance is credited correctly via API @regression @FR-06', async ({ activeUser, page, request }) => {
+  125 |     Logger.info('TC-API-003: Verifying destination account is credited correctly after API transfer');
+  126 | 
+  127 |    
+  128 |     test.info().annotations.push({ type: 'Test Type', description: 'API' });
+  129 |     test.info().annotations.push({ type: 'Scenario', description: 'TS-FT-04' });
+  130 |     test.info().annotations.push({ type: 'Requirement', description: 'FR-06' });
+  131 |     test.info().annotations.push({ type: 'Doc Status', description: 'Pass' });
+  132 | 
+  133 |     const data = apiData.find(d => d.testCaseId === 'TC-API-01')!;
+  134 |     const transferAmount = data.amount;
+  135 |     const parsedAmount = parseFloat(transferAmount);
+  136 |     const sourceAccount = activeUser.account1;
+  137 |     const destinationAccount = activeUser.account2;
+  138 | 
+  139 |     Logger.info(`TC-API-003: Arrange complete — amount=${transferAmount}, from=#${sourceAccount}, to=#${destinationAccount}`);
+  140 | 
+  141 |     const preBalanceRes = await request.get(`/parabank/services/bank/accounts/${destinationAccount}`, {
+  142 |       headers: { 'Accept': 'application/json' }
+  143 |     });
+  144 |     expect(preBalanceRes.status(), 'Pre-balance GET should return 200').toBe(200);
+  145 |     const preBalanceData = await preBalanceRes.json();
+  146 |     const preDestBalance = parseFloat(preBalanceData.balance);
+  147 |     ApiLogger.info({ testCase: 'TC-API-003', endpoint: `/accounts/${destinationAccount}`, preBalance: preDestBalance });
+  148 | 
+  149 |     Logger.info(`TC-API-003: Pre-transfer destination balance = $${preDestBalance}`);
+  150 | 
+  151 | 
+  152 |     const transferRes = await page.request.post(`/parabank/services/bank/transfer`, {
+  153 |       params: {
+  154 |         fromAccountId: sourceAccount,
+  155 |         toAccountId: destinationAccount,
+  156 |         amount: transferAmount
+  157 |       },
+  158 |       headers: { 'Accept': 'application/json' }
+  159 |     });
+  160 |     const transferBody = await transferRes.text();
+  161 |     ApiLogger.info({ testCase: 'TC-API-003', endpoint: '/transfer', status: transferRes.status(), response: transferBody.substring(0, 500) });
+  162 | 
+  163 |     Logger.info(`TC-API-003: POST /transfer returned HTTP ${transferRes.status()}`);
+  164 | 
+  165 | 
+> 166 |     expect(transferRes.status(), 'POST /transfer should return HTTP 200').toBe(200);
+      |                                                                           ^ Error: POST /transfer should return HTTP 200
+  167 | 
+  168 |  
+  169 |     const postBalanceRes = await request.get(`/parabank/services/bank/accounts/${destinationAccount}`, {
+  170 |       headers: { 'Accept': 'application/json' }
+  171 |     });
+  172 |     expect(postBalanceRes.status(), 'Post-balance GET should return 200').toBe(200);
+  173 |     const postBalanceData = await postBalanceRes.json();
+  174 |     const postDestBalance = parseFloat(postBalanceData.balance);
+  175 |     ApiLogger.info({ testCase: 'TC-API-003', endpoint: `/accounts/${destinationAccount}`, postBalance: postDestBalance });
+  176 | 
+  177 |     Logger.info(`TC-API-003: Post-transfer destination balance = $${postDestBalance}`);
+  178 | 
+  179 |    
+  180 |     expect(postDestBalance,
+  181 |       `FR-06: Destination #${destinationAccount} should be credited by exactly $${parsedAmount}. ` +
+  182 |       `Pre=$${preDestBalance}, Post=$${postDestBalance}, Expected post=$${preDestBalance + parsedAmount}`
+  183 |     ).toBeCloseTo(preDestBalance + parsedAmount, 2);
+  184 | 
+  185 |     Logger.info(`TC-API-003: PASSED — Destination credited correctly: $${preDestBalance} → $${postDestBalance} (delta = +$${parsedAmount})`);
+  186 |   });
+  187 | 
+  188 | 
+  189 | //7
+  190 |   test('TC-API-007: Transfer amount exceeds available balance - insufficient funds (DEF-FT-001) @defects @FR-09', async ({ activeUser, page, request }) => {
+  191 |     Logger.info('TC-API-007: Executing insufficient-funds transfer via API — expecting 4xx but known defect DEF-FT-001');
+  192 | 
+  193 |    
+  194 |     test.info().annotations.push({ type: 'Test Type', description: 'API (Negative)' });
+  195 |     test.info().annotations.push({ type: 'Scenario', description: 'TS-FT-08' });
+  196 |     test.info().annotations.push({ type: 'Requirement', description: 'FR-09' });
+  197 |     test.info().annotations.push({ type: 'Known Bug', description: 'DEF-FT-001' });
+  198 |     test.info().annotations.push({ type: 'Doc Status', description: 'Fail' });
+  199 | 
+  200 |     const data = apiData.find(d => d.testCaseId === 'TC-API-04')!;
+  201 |     const transferAmount = data.amount;
+  202 |     const sourceAccount = activeUser.account1;
+  203 |     const destinationAccount = activeUser.account2;
+  204 | 
+  205 |     Logger.info(`TC-API-007: Arrange complete — overdraft amount=${transferAmount}, from=#${sourceAccount}, to=#${destinationAccount}`);
+  206 | 
+  207 |   
+  208 |     const preBalanceRes = await request.get(`/parabank/services/bank/accounts/${sourceAccount}`, {
+  209 |       headers: { 'Accept': 'application/json' }
+  210 |     });
+  211 |     expect(preBalanceRes.status()).toBe(200);
+  212 |     const preBalanceData = await preBalanceRes.json();
+  213 |     const preSourceBalance = parseFloat(preBalanceData.balance);
+  214 | 
+  215 |     Logger.info(`TC-API-007: Pre-transfer source balance = $${preSourceBalance} (attempting to transfer $${transferAmount})`);
+  216 | 
+  217 |   
+  218 |     const transferRes = await page.request.post(`/parabank/services/bank/transfer`, {
+  219 |       params: {
+  220 |         fromAccountId: sourceAccount,
+  221 |         toAccountId: destinationAccount,
+  222 |         amount: transferAmount
+  223 |       },
+  224 |       headers: { 'Accept': 'application/json' }
+  225 |     });
+  226 |     const transferBody = await transferRes.text();
+  227 |     const transferStatus = transferRes.status();
+  228 |     ApiLogger.info({ testCase: 'TC-API-007', endpoint: '/transfer', status: transferStatus, response: transferBody.substring(0, 500) });
+  229 | 
+  230 |     Logger.info(`TC-API-007: POST /transfer returned HTTP ${transferStatus}`);
+  231 | 
+  232 | 
+  233 |     if (transferStatus === 200) {
+  234 |       // Bug is active — API incorrectly accepted the overdraft
+  235 |       const postBalanceRes = await request.get(`/parabank/services/bank/accounts/${sourceAccount}`, {
+  236 |         headers: { 'Accept': 'application/json' }
+  237 |       });
+  238 |       const postBalanceData = await postBalanceRes.json();
+  239 |       const postSourceBalance = parseFloat(postBalanceData.balance);
+  240 | 
+  241 |       Logger.info(`TC-API-007: Post-transfer source balance = $${postSourceBalance} (was $${preSourceBalance})`);
+  242 | 
+  243 |       expect.soft(transferStatus,
+  244 |         'DEF-FT-001 active: API incorrectly returned HTTP 200 for insufficient-funds transfer of $' +
+  245 |         transferAmount + '. Source balance went from $' + preSourceBalance + ' to $' + postSourceBalance +
+  246 |         ' (deeply negative). Expected: HTTP 4xx with "Insufficient funds" error.'
+  247 |       ).toBe(200);
+  248 | 
+  249 |       Logger.info('TC-API-007: Soft assertion logged — DEF-FT-001 confirmed ACTIVE, balance went negative');
+  250 |     } else {
+  251 | 
+  252 |       expect.soft(transferStatus,
+  253 |         `DEF-FT-001 appears FIXED — API correctly rejected with HTTP ${transferStatus}.`
+  254 |       ).not.toBe(200);
+  255 | 
+  256 |       Logger.info(`TC-API-007: Bug DEF-FT-001 appears FIXED — API returned HTTP ${transferStatus}`);
+  257 |     }
+  258 | 
+  259 |     Logger.info(`TC-API-007: COMPLETED — Insufficient-funds defect path finished, status: ${transferStatus}`);
+  260 |   });
+  261 | 
+  262 | 
+  263 | //8
+  264 |   test('TC-API-008: Same account in fromAccountId and toAccountId accepted (DEF-FT-004) @defects @FR-09', async ({ activeUser, page }) => {
+  265 |     Logger.info('TC-API-008: Executing same-account transfer via API (from=to) — expecting 4xx but known defect DEF-FT-004');
+  266 | 
+```

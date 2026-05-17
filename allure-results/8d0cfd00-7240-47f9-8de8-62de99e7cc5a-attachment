@@ -1,0 +1,179 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transferUI.spec.ts >> UI Transfer Validations @ui >> TC-UI-006: Same source and destination account allowed (DEF-FT-004) @defects @FR-09
+- Location: tests\ui\transferUI.spec.ts:226:7
+
+# Error details
+
+```
+Error: Open-account flow should land on confirmation page
+
+expect(locator).toBeVisible() failed
+
+Locator: getByRole('heading', { name: 'Account Opened!' })
+Expected: visible
+Timeout: 15000ms
+Error: element(s) not found
+
+Call log:
+  - Open-account flow should land on confirmation page with timeout 15000ms
+  - waiting for getByRole('heading', { name: 'Account Opened!' })
+
+```
+
+```yaml
+- link:
+  - /url: admin.htm
+  - img
+- link "ParaBank":
+  - /url: index.htm
+  - img "ParaBank"
+- paragraph: Experience the difference
+- list:
+  - listitem: Solutions
+  - listitem:
+    - link "About Us":
+      - /url: about.htm
+  - listitem:
+    - link "Services":
+      - /url: services.htm
+  - listitem:
+    - link "Products":
+      - /url: http://www.parasoft.com/jsp/products.jsp
+  - listitem:
+    - link "Locations":
+      - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+  - listitem:
+    - link "Admin Page":
+      - /url: admin.htm
+- list:
+  - listitem:
+    - link "home":
+      - /url: index.htm
+  - listitem:
+    - link "about":
+      - /url: about.htm
+  - listitem:
+    - link "contact":
+      - /url: contact.htm
+- paragraph: Welcome Ushosi Pal
+- heading "Account Services" [level=2]
+- list:
+  - listitem:
+    - link "Open New Account":
+      - /url: openaccount.htm
+  - listitem:
+    - link "Accounts Overview":
+      - /url: overview.htm
+  - listitem:
+    - link "Transfer Funds":
+      - /url: transfer.htm
+  - listitem:
+    - link "Bill Pay":
+      - /url: billpay.htm
+  - listitem:
+    - link "Find Transactions":
+      - /url: findtrans.htm
+  - listitem:
+    - link "Update Contact Info":
+      - /url: updateprofile.htm
+  - listitem:
+    - link "Request Loan":
+      - /url: requestloan.htm
+  - listitem:
+    - link "Log Out":
+      - /url: logout.htm
+- heading "Error!" [level=1]
+- paragraph: An internal error has occurred and has been logged.
+- list:
+  - listitem:
+    - link "Home":
+      - /url: index.htm
+    - text: "|"
+  - listitem:
+    - link "About Us":
+      - /url: about.htm
+    - text: "|"
+  - listitem:
+    - link "Services":
+      - /url: services.htm
+    - text: "|"
+  - listitem:
+    - link "Products":
+      - /url: http://www.parasoft.com/jsp/products.jsp
+    - text: "|"
+  - listitem:
+    - link "Locations":
+      - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+    - text: "|"
+  - listitem:
+    - link "Forum":
+      - /url: http://forums.parasoft.com/
+    - text: "|"
+  - listitem:
+    - link "Site Map":
+      - /url: sitemap.htm
+    - text: "|"
+  - listitem:
+    - link "Contact Us":
+      - /url: contact.htm
+- paragraph: © Parasoft. All rights reserved.
+- list:
+  - listitem: "Visit us at:"
+  - listitem:
+    - link "www.parasoft.com":
+      - /url: http://www.parasoft.com/
+```
+
+# Test source
+
+```ts
+  1  | import { Page, expect } from '@playwright/test';
+  2  | import { Logger } from '../utils/logger';
+  3  | 
+  4  | export enum AccountType {
+  5  |   CHECKING = '0',
+  6  |   SAVINGS = '1'
+  7  | }
+  8  | 
+  9  | export class OpenAccountPage {
+  10 |   constructor(public readonly page: Page) {}
+  11 | 
+  12 |   async navigate(): Promise<void> {
+  13 |     Logger.info('OpenAccountPage: Navigating to /parabank/openaccount.htm');
+  14 |     await this.page.goto('/parabank/openaccount.htm');
+  15 |   }
+  16 | 
+  17 | 
+  18 |   async openNewAccount(accountType: AccountType, fromAccountId: string): Promise<string> {
+  19 |     const typeLabel = accountType === AccountType.SAVINGS ? 'Savings' : 'Checking';
+  20 |     Logger.info(`OpenAccountPage: Opening ${typeLabel} account funded from #${fromAccountId}`);
+  21 | 
+  22 |    
+  23 |     await this.page.selectOption('#type', accountType);
+  24 | 
+  25 |     await this.page.locator('#fromAccountId option').first()
+  26 |       .waitFor({ state: 'attached', timeout: 10_000 });
+  27 |     await this.page.selectOption('#fromAccountId', fromAccountId);
+  28 | 
+  29 | 
+  30 |     await this.page.getByRole('button', { name: 'Open New Account' }).click();
+  31 | 
+  32 |     await expect(
+  33 |       this.page.getByRole('heading', { name: 'Account Opened!' }),
+  34 |       'Open-account flow should land on confirmation page'
+> 35 |     ).toBeVisible({ timeout: 15_000 });
+     |       ^ Error: Open-account flow should land on confirmation page
+  36 | 
+  37 |     const newAccountId = (await this.page.locator('#newAccountId').innerText()).trim();
+  38 |     Logger.info(`OpenAccountPage: New account created: #${newAccountId}`);
+  39 |     return newAccountId;
+  40 |   }
+  41 | }
+```

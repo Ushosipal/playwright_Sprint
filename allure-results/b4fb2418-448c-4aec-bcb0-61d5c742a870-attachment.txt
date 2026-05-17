@@ -1,0 +1,19 @@
+2026-05-16 21:57:39 [info]: Fixture: staggered start delay = 2931 ms
+2026-05-16 21:57:42 [info]: Fixture: starting UI registration for username=qauser_1778948862926
+2026-05-16 21:57:42 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 21:57:43 [info]: RegisterPage: Submitting registration for username=qauser_1778948862926
+2026-05-16 21:57:46 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 21:57:46 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 21:57:46 [info]: AccountOverviewPage: Primary account captured: #49197
+2026-05-16 21:57:46 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 21:57:46 [info]: OpenAccountPage: Opening Savings account funded from #49197
+2026-05-16 21:57:47 [info]: OpenAccountPage: New account created: #49419
+2026-05-16 21:57:47 [info]: Fixture COMPLETE: user=qauser_1778948862926 account1=49197 account2=49419
+2026-05-16 21:57:47 [info]: TC-UI-001: Executing standard fund transfer between two accounts
+2026-05-16 21:57:47 [info]: TC-UI-001: Arrange complete — amount=100, from=#49197, to=#49419
+2026-05-16 21:57:47 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-16 21:57:48 [info]: TC-UI-001: Navigated to Transfer Funds page
+2026-05-16 21:57:48 [info]: TransferFundsPage: Transferring $100: #49197 -> #49419
+2026-05-16 21:57:49 [info]: TC-UI-001: Transfer submitted via UI
+2026-05-16 21:57:49 [info]: TC-UI-001: Confirmation page verified — title reads "Transfer Complete!" and body contains correct amount and account numbers
+2026-05-16 21:57:49 [info]: TC-UI-001: PASSED — Transfer completed, confirmation message verified with correct amount and account numbers

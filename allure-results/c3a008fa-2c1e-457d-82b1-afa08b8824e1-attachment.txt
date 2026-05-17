@@ -1,0 +1,6 @@
+2026-05-17 00:47:01 [info]: Fixture: staggered start delay = 888 ms
+2026-05-17 00:47:02 [info]: Fixture: starting UI registration for username=qauser_1778959022032
+2026-05-17 00:47:02 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-17 00:47:02 [info]: RegisterPage: Submitting registration for username=qauser_1778959022032
+2026-05-17 00:47:03 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-17 00:47:03 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link

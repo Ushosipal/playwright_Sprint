@@ -1,0 +1,197 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: api\transferAPI.spec.ts >> API Transfer Validations @api >> TC-API-007: Transfer amount exceeds available balance - insufficient funds (DEF-FT-001) @defects @FR-09
+- Location: tests\api\transferAPI.spec.ts:190:7
+
+# Error details
+
+```
+TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('#accountTable') to be visible
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link:
+        - /url: admin.htm
+        - img [ref=e4]
+      - link "ParaBank":
+        - /url: index.htm
+        - img "ParaBank" [ref=e5]
+      - paragraph [ref=e6]: Experience the difference
+    - generic [ref=e7]:
+      - list [ref=e8]:
+        - listitem [ref=e9]: Solutions
+        - listitem [ref=e10]:
+          - link "About Us" [ref=e11]:
+            - /url: about.htm
+        - listitem [ref=e12]:
+          - link "Services" [ref=e13]:
+            - /url: services.htm
+        - listitem [ref=e14]:
+          - link "Products" [ref=e15]:
+            - /url: http://www.parasoft.com/jsp/products.jsp
+        - listitem [ref=e16]:
+          - link "Locations" [ref=e17]:
+            - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - listitem [ref=e18]:
+          - link "Admin Page" [ref=e19]:
+            - /url: admin.htm
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "home" [ref=e22]:
+            - /url: index.htm
+        - listitem [ref=e23]:
+          - link "about" [ref=e24]:
+            - /url: about.htm
+        - listitem [ref=e25]:
+          - link "contact" [ref=e26]:
+            - /url: contact.htm
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: Welcome Ushosi Pal
+        - heading "Account Services" [level=2] [ref=e30]
+        - list [ref=e31]:
+          - listitem [ref=e32]:
+            - link "Open New Account" [ref=e33]:
+              - /url: openaccount.htm
+          - listitem [ref=e34]:
+            - link "Accounts Overview" [ref=e35]:
+              - /url: overview.htm
+          - listitem [ref=e36]:
+            - link "Transfer Funds" [ref=e37]:
+              - /url: transfer.htm
+          - listitem [ref=e38]:
+            - link "Bill Pay" [ref=e39]:
+              - /url: billpay.htm
+          - listitem [ref=e40]:
+            - link "Find Transactions" [ref=e41]:
+              - /url: findtrans.htm
+          - listitem [ref=e42]:
+            - link "Update Contact Info" [ref=e43]:
+              - /url: updateprofile.htm
+          - listitem [ref=e44]:
+            - link "Request Loan" [ref=e45]:
+              - /url: requestloan.htm
+          - listitem [ref=e46]:
+            - link "Log Out" [ref=e47]:
+              - /url: logout.htm
+      - generic [ref=e48]:
+        - heading "Welcome null" [level=1] [ref=e49]
+        - paragraph [ref=e50]: Your account was created successfully. You are now logged in.
+  - generic [ref=e52]:
+    - list [ref=e53]:
+      - listitem [ref=e54]:
+        - link "Home" [ref=e55]:
+          - /url: index.htm
+        - text: "|"
+      - listitem [ref=e56]:
+        - link "About Us" [ref=e57]:
+          - /url: about.htm
+        - text: "|"
+      - listitem [ref=e58]:
+        - link "Services" [ref=e59]:
+          - /url: services.htm
+        - text: "|"
+      - listitem [ref=e60]:
+        - link "Products" [ref=e61]:
+          - /url: http://www.parasoft.com/jsp/products.jsp
+        - text: "|"
+      - listitem [ref=e62]:
+        - link "Locations" [ref=e63]:
+          - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - text: "|"
+      - listitem [ref=e64]:
+        - link "Forum" [ref=e65]:
+          - /url: http://forums.parasoft.com/
+        - text: "|"
+      - listitem [ref=e66]:
+        - link "Site Map" [ref=e67]:
+          - /url: sitemap.htm
+        - text: "|"
+      - listitem [ref=e68]:
+        - link "Contact Us" [ref=e69]:
+          - /url: contact.htm
+    - paragraph [ref=e70]: © Parasoft. All rights reserved.
+    - list [ref=e71]:
+      - listitem [ref=e72]: "Visit us at:"
+      - listitem [ref=e73]:
+        - link "www.parasoft.com" [ref=e74]:
+          - /url: http://www.parasoft.com/
+```
+
+# Test source
+
+```ts
+  1  | // import { Page, expect } from '@playwright/test';
+  2  | // import { Logger } from '../utils/logger';
+  3  | 
+  4  | // export class AccountOverviewPage {
+  5  | //   constructor(public readonly page: Page) {}
+  6  | 
+  7  | //   async navigate(): Promise<void> {
+  8  | //     Logger.info('AccountOverviewPage: Clicking "Accounts Overview" nav link');
+  9  | //     await this.page.getByRole('link', { name: 'Accounts Overview' }).click();
+  10 | //     await expect(this.page).toHaveURL(/.*overview\.htm.*/, { timeout: 10_000 });
+  11 | //   }
+  12 | 
+  13 | //   async getPrimaryAccountId(): Promise<string> {
+  14 | //     const firstAccountLink = this.page.locator('#accountTable tbody tr td a').first();
+  15 | //     await firstAccountLink.waitFor({ state: 'visible', timeout: 10_000 });
+  16 | //     const accountId = (await firstAccountLink.innerText()).trim();
+  17 | //     Logger.info(`AccountOverviewPage: Primary account captured: #${accountId}`);
+  18 | //     return accountId;
+  19 | //   }
+  20 | 
+  21 |   
+  22 | //   async getAllAccountIds(): Promise<string[]> {
+  23 | //     const links = this.page.locator('#accountTable tbody tr td a');
+  24 | //     await links.first().waitFor({ state: 'visible' });
+  25 | //     const ids = await links.allInnerTexts();
+  26 | //     return ids.map(s => s.trim());
+  27 | //   }
+  28 | // }
+  29 | 
+  30 | import { Page, expect } from '@playwright/test';
+  31 | import { Logger } from '../utils/logger';
+  32 | 
+  33 | export class AccountOverviewPage {
+  34 |   constructor(public readonly page: Page) {}
+  35 | 
+  36 |   async navigate(): Promise<void> {
+  37 |     Logger.info('AccountOverviewPage: Clicking "Accounts Overview" nav link');
+  38 |     await this.page.getByRole('link', { name: 'Accounts Overview' }).click();
+  39 |     await expect(this.page).toHaveURL(/.*overview\.htm.*/, { timeout: 10_000 });
+> 40 |     await this.page.locator('#accountTable').waitFor({ state: 'visible', timeout: 10_000 });
+     |                                              ^ TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+  41 |   }
+  42 | 
+  43 |   async getPrimaryAccountId(): Promise<string> {
+  44 |     const firstAccountLink = this.page.locator('#accountTable tbody tr td a').first();
+  45 |     await firstAccountLink.waitFor({ state: 'visible', timeout: 10_000 });
+  46 |     const accountId = (await firstAccountLink.innerText()).trim();
+  47 |     Logger.info(`AccountOverviewPage: Primary account captured: #${accountId}`);
+  48 |     return accountId;
+  49 |   }
+  50 | 
+  51 |   
+  52 |   async getAllAccountIds(): Promise<string[]> {
+  53 |     const links = this.page.locator('#accountTable tbody tr td a');
+  54 |     await links.first().waitFor({ state: 'visible' });
+  55 |     const ids = await links.allInnerTexts();
+  56 |     return ids.map(s => s.trim());
+  57 |   }
+  58 | }
+```

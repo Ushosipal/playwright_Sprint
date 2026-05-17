@@ -1,0 +1,29 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transferUI.spec.ts >> UI Transfer Validations @ui >> TC-UI-001: Successful fund transfer between own accounts @smoke @FR-05 @FR-08
+- Location: tests\ui\transferUI.spec.ts:19:7
+
+# Error details
+
+```
+Test timeout of 60000ms exceeded while setting up "page".
+```
+
+```
+Error: browserContext.newPage: Target page, context or browser has been closed
+```
+
+```
+Error: browserContext.close: Test timeout of 60000ms exceeded.
+Browser logs:
+
+<launching> C:\Users\Ushosi\AppData\Local\ms-playwright\webkit-2287\Playwright.exe --inspector-pipe --disable-accelerated-compositing --headless --no-startup-window
+<launched> pid=20180
+[pid=20180] <gracefully close start>
+```

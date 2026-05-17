@@ -1,0 +1,23 @@
+2026-05-17 13:52:39 [info]: Fixture: staggered start delay = 2074 ms
+2026-05-17 13:52:41 [info]: Fixture: starting UI registration for username=qauser_1779006161491
+2026-05-17 13:52:41 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-17 13:52:41 [info]: RegisterPage: Submitting registration for username=qauser_1779006161491
+2026-05-17 13:52:42 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-17 13:52:42 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-17 13:52:42 [info]: AccountOverviewPage: Primary account captured: #171075
+2026-05-17 13:52:42 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-17 13:52:42 [info]: OpenAccountPage: Opening Savings account funded from #171075
+2026-05-17 13:52:43 [info]: OpenAccountPage: New account created: #171408
+2026-05-17 13:52:43 [info]: Fixture COMPLETE: user=qauser_1779006161491 account1=171075 account2=171408
+2026-05-17 13:52:43 [info]: TC-E2E-003: Executing hybrid minimum boundary test — $0.01 transfer with API balance verification
+2026-05-17 13:52:43 [info]: TC-E2E-003: Arrange complete — amount=0.01, from=#171075, to=#171408
+2026-05-17 13:52:43 [info]: TC-E2E-003: Pre-transfer source balance = $415.5
+2026-05-17 13:52:43 [info]: TC-E2E-003: Pre-transfer destination balance = $100
+2026-05-17 13:52:43 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-17 13:52:43 [info]: TC-E2E-003: Navigated to Transfer Funds page
+2026-05-17 13:52:43 [info]: TransferFundsPage: Transferring $0.01: #171075 -> #171408
+2026-05-17 13:52:43 [info]: TC-E2E-003: Minimum boundary transfer ($0.01) submitted via UI
+2026-05-17 13:52:43 [info]: TC-E2E-003: UI confirmation page verified — "$0.01" transfer confirmed
+2026-05-17 13:52:43 [info]: TC-E2E-003: Post-transfer source balance = $415.49
+2026-05-17 13:52:43 [info]: TC-E2E-003: Post-transfer destination balance = $100.01
+2026-05-17 13:52:43 [info]: TC-E2E-003: PASSED — $0.01 boundary correctly reflected: source -$0.01, destination +$0.01

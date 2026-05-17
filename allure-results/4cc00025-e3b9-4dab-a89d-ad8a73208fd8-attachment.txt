@@ -1,0 +1,1 @@
+[screenshot] Page closed before screenshot for "TC-UI-006: Same source and destination account allowed (DEF-FT-004) @defects @FR-09"

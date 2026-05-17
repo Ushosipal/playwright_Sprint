@@ -1,7 +1,7 @@
 import { test as base, expect } from '@playwright/test';
 import { RegisterPage } from '../page/registerPage';
-import { OpenAccountPage, AccountType } from '../page/openAccount.page';
-import { AccountOverviewPage } from '../page/accountOverview.page';
+import { OpenAccountPage, AccountType } from '../page/openAccountPage';
+import { AccountOverviewPage } from '../page/accountOverviewPage';
 import { TransferFundsPage } from '../page/transferPage';
 import { Logger } from '../utils/logger';
 import { captureScreenshot } from '../utils/screenshot';
@@ -41,7 +41,7 @@ export const test = base.extend<TestFixtures>({
     await captureScreenshot(page, testInfo, label);
   }, { auto: true }],
 
-  // ----- Thin POM fixtures -----
+
   registerPage: async ({ page }, use) => {
     await use(new RegisterPage(page));
   },

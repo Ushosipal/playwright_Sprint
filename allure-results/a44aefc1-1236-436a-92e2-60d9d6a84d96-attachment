@@ -1,0 +1,88 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: api\transferAPI.spec.ts >> API Transfer Validations @api >> TC-API-007: Transfer amount exceeds available balance - insufficient funds (DEF-FT-001) @defects @FR-09
+- Location: tests\api\transferAPI.spec.ts:190:7
+
+# Error details
+
+```
+Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:9090/parabank/register.htm
+Call log:
+  - navigating to "http://localhost:9090/parabank/register.htm", waiting until "load"
+
+```
+
+# Test source
+
+```ts
+  1  | import { Page, expect } from '@playwright/test';
+  2  | import { Logger } from '../utils/logger';
+  3  | 
+  4  | export interface RegistrationData {
+  5  |   firstName?: string;
+  6  |   lastName?: string;
+  7  |   street?: string;
+  8  |   city?: string;
+  9  |   state?: string;
+  10 |   zipCode?: string;
+  11 |   phoneNumber?: string;
+  12 |   ssn?: string;
+  13 |   username: string;
+  14 |   password: string;
+  15 | }
+  16 | 
+  17 | export class RegisterPage {
+  18 |   constructor(public readonly page: Page) {}
+  19 | 
+  20 |   async navigate(): Promise<void> {
+  21 |     Logger.info('RegisterPage: Navigating to /parabank/register.htm');
+> 22 |     await this.page.goto('/parabank/register.htm');
+     |                     ^ Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:9090/parabank/register.htm
+  23 |   }
+  24 |   async registerDynamicUser(data: RegistrationData): Promise<void> {
+  25 |     const filled: Required<RegistrationData> = {
+  26 |       firstName: data.firstName ?? 'Ushosi',
+  27 |       lastName: data.lastName ?? 'Pal',
+  28 |       street: data.street ?? 'Haldia',
+  29 |       city: data.city ?? 'Haldia',
+  30 |       state: data.state ?? 'TS',
+  31 |       zipCode: data.zipCode ?? '721602',
+  32 |       phoneNumber: data.phoneNumber ?? '555-0199',
+  33 |       ssn: data.ssn ?? `SSN-12345789`,
+  34 |       username: data.username,
+  35 |       password: data.password
+  36 |     };
+  37 | 
+  38 |     Logger.info(`RegisterPage: Submitting registration for username=${filled.username}`);
+  39 | 
+  40 |   
+  41 |     await this.page.locator('input[id="customer.firstName"]').fill(filled.firstName);
+  42 |     await this.page.locator('input[id="customer.lastName"]').fill(filled.lastName);
+  43 |     await this.page.locator('input[id="customer.address.street"]').fill(filled.street);
+  44 |     await this.page.locator('input[id="customer.address.city"]').fill(filled.city);
+  45 |     await this.page.locator('input[id="customer.address.state"]').fill(filled.state);
+  46 |     await this.page.locator('input[id="customer.address.zipCode"]').fill(filled.zipCode);
+  47 |     await this.page.locator('input[id="customer.phoneNumber"]').fill(filled.phoneNumber);
+  48 |     await this.page.locator('input[id="customer.ssn"]').fill(filled.ssn);
+  49 |     await this.page.locator('input[id="customer.username"]').fill(filled.username);
+  50 | 
+  51 |     await this.page.locator('input[id="customer.password"]').fill(filled.password);
+  52 |     await this.page.locator('input[id="repeatedPassword"]').fill(filled.password);
+  53 | 
+  54 |   
+  55 |     await this.page.getByRole('button', { name: 'Register' }).click();
+  56 |   }
+  57 |   
+  58 |   async verifyRegistrationSuccess(): Promise<void> {
+  59 |     await expect(this.page.locator('.title'), 'Registration should land on Welcome page')
+  60 |       .toContainText('Welcome', { timeout: 15000 });
+  61 |     Logger.info('RegisterPage: Registration successful (Welcome page detected)');
+  62 |   }
+  63 | }
+```

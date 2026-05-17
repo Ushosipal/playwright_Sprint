@@ -1,0 +1,343 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: e2e\transfer.e2e.spec.ts >> E2E Hybrid Transfer Validations @e2e >> TC-E2E-07: Invalid amount inputs (0, -50, abc) via UI — API confirms balance state @e2e @defects @FR-09
+- Location: tests\e2e\transfer.e2e.spec.ts:72:9
+
+# Error details
+
+```
+Error: Known bugs DEF-002+DEF-003+DEF-005 active: Source #35877 drifted by $-50.00 from invalid inputs (should be 0).
+
+expect(received).toBeCloseTo(expected, precision)
+
+Expected: 0
+Received: -50
+
+Expected precision:    2
+Expected difference: < 0.005
+Received difference:   50
+```
+
+```
+Error: Known bugs DEF-002+DEF-003+DEF-005 active: Target #35988 drifted by $-50.00 from invalid inputs (should be 0).
+
+expect(received).toBeCloseTo(expected, precision)
+
+Expected: 0
+Received: -50
+
+Expected precision:    2
+Expected difference: < 0.005
+Received difference:   50
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link:
+        - /url: admin.htm
+        - img [ref=e4] [cursor=pointer]
+      - link "ParaBank":
+        - /url: index.htm
+        - img "ParaBank" [ref=e5] [cursor=pointer]
+      - paragraph [ref=e6]: Experience the difference
+    - generic [ref=e7]:
+      - list [ref=e8]:
+        - listitem [ref=e9]: Solutions
+        - listitem [ref=e10]:
+          - link "About Us" [ref=e11] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e12]:
+          - link "Services" [ref=e13] [cursor=pointer]:
+            - /url: services.htm
+        - listitem [ref=e14]:
+          - link "Products" [ref=e15] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/products.jsp
+        - listitem [ref=e16]:
+          - link "Locations" [ref=e17] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - listitem [ref=e18]:
+          - link "Admin Page" [ref=e19] [cursor=pointer]:
+            - /url: admin.htm
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "home" [ref=e22] [cursor=pointer]:
+            - /url: index.htm
+        - listitem [ref=e23]:
+          - link "about" [ref=e24] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e25]:
+          - link "contact" [ref=e26] [cursor=pointer]:
+            - /url: contact.htm
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: Welcome Sudip Chel
+        - heading "Account Services" [level=2] [ref=e30]
+        - list [ref=e31]:
+          - listitem [ref=e32]:
+            - link "Open New Account" [ref=e33] [cursor=pointer]:
+              - /url: openaccount.htm
+          - listitem [ref=e34]:
+            - link "Accounts Overview" [ref=e35] [cursor=pointer]:
+              - /url: overview.htm
+          - listitem [ref=e36]:
+            - link "Transfer Funds" [ref=e37] [cursor=pointer]:
+              - /url: transfer.htm
+          - listitem [ref=e38]:
+            - link "Bill Pay" [ref=e39] [cursor=pointer]:
+              - /url: billpay.htm
+          - listitem [ref=e40]:
+            - link "Find Transactions" [ref=e41] [cursor=pointer]:
+              - /url: findtrans.htm
+          - listitem [ref=e42]:
+            - link "Update Contact Info" [ref=e43] [cursor=pointer]:
+              - /url: updateprofile.htm
+          - listitem [ref=e44]:
+            - link "Request Loan" [ref=e45] [cursor=pointer]:
+              - /url: requestloan.htm
+          - listitem [ref=e46]:
+            - link "Log Out" [ref=e47] [cursor=pointer]:
+              - /url: logout.htm
+      - generic [ref=e50]:
+        - heading "Error!" [level=1] [ref=e51]
+        - paragraph [ref=e52]: An internal error has occurred and has been logged.
+  - generic [ref=e54]:
+    - list [ref=e55]:
+      - listitem [ref=e56]:
+        - link "Home" [ref=e57] [cursor=pointer]:
+          - /url: index.htm
+        - text: "|"
+      - listitem [ref=e58]:
+        - link "About Us" [ref=e59] [cursor=pointer]:
+          - /url: about.htm
+        - text: "|"
+      - listitem [ref=e60]:
+        - link "Services" [ref=e61] [cursor=pointer]:
+          - /url: services.htm
+        - text: "|"
+      - listitem [ref=e62]:
+        - link "Products" [ref=e63] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/products.jsp
+        - text: "|"
+      - listitem [ref=e64]:
+        - link "Locations" [ref=e65] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - text: "|"
+      - listitem [ref=e66]:
+        - link "Forum" [ref=e67] [cursor=pointer]:
+          - /url: http://forums.parasoft.com/
+        - text: "|"
+      - listitem [ref=e68]:
+        - link "Site Map" [ref=e69] [cursor=pointer]:
+          - /url: sitemap.htm
+        - text: "|"
+      - listitem [ref=e70]:
+        - link "Contact Us" [ref=e71] [cursor=pointer]:
+          - /url: contact.htm
+    - paragraph [ref=e72]: © Parasoft. All rights reserved.
+    - list [ref=e73]:
+      - listitem [ref=e74]: "Visit us at:"
+      - listitem [ref=e75]:
+        - link "www.parasoft.com" [ref=e76] [cursor=pointer]:
+          - /url: http://www.parasoft.com/
+```
+
+# Test source
+
+```ts
+  87  |         });
+  88  |       }
+  89  | 
+  90  |       const sourceAcc = activeUser.account1;
+  91  |       const targetAcc = data.isSameAccount ? activeUser.account1 : activeUser.account2;
+  92  | 
+  93  |       // Capture pre-transfer balances
+  94  |       const preSource = await fetchBalance(request, sourceAcc);
+  95  |       const preTarget = data.isSameAccount
+  96  |         ? preSource
+  97  |         : await fetchBalance(request, targetAcc);
+  98  |       Logger.info(
+  99  |         `${data.testCaseId}: pre-balance source=$${preSource} target=$${preTarget}`
+  100 |       );
+  101 | 
+  102 |       // ==================== BRANCH 1: amountArray (TC-E2E-06) ====================
+  103 |       if (data.amountArray) {
+  104 |         for (const amt of data.amountArray) {
+  105 |           await transferPage.navigate();
+  106 |           await transferPage.performTransfer(amt, sourceAcc, targetAcc);
+  107 |           await transferPage.verifySuccess(amt, sourceAcc, targetAcc);
+  108 |         }
+  109 | 
+  110 |         const postSource = await fetchBalance(request, sourceAcc);
+  111 |         const postTarget = await fetchBalance(request, targetAcc);
+  112 |         Logger.info(
+  113 |           `${data.testCaseId}: post-balance source=$${postSource} target=$${postTarget}`
+  114 |         );
+  115 | 
+  116 |         // FR-06: cumulative deduction correctness
+  117 |         expect(postSource,
+  118 |           `FR-06: Cumulative deduction should be $${data.expectedCumulativeDeduction} ` +
+  119 |           `(${data.amountArray.join(' + ')})`
+  120 |         ).toBeCloseTo(preSource - data.expectedCumulativeDeduction!, 2);
+  121 | 
+  122 |         expect(postTarget,
+  123 |           `FR-06: Cumulative credit should be $${data.expectedCumulativeDeduction}`
+  124 |         ).toBeCloseTo(preTarget + data.expectedCumulativeDeduction!, 2);
+  125 | 
+  126 |         // FR-07: each transfer should appear in history as Debit/Credit pair
+  127 |         if (data.validateHistory) {
+  128 |           const sourceTxns = await fetchTransactions(request, sourceAcc);
+  129 |           const targetTxns = await fetchTransactions(request, targetAcc);
+  130 | 
+  131 |           for (const amt of data.amountArray) {
+  132 |             const amount = parseFloat(amt);
+  133 |             const debit = sourceTxns.find(tx =>
+  134 |               tx.type === 'Debit' &&
+  135 |               Math.abs(parseFloat(String(tx.amount))) === amount
+  136 |             );
+  137 |             const credit = targetTxns.find(tx =>
+  138 |               tx.type === 'Credit' &&
+  139 |               Math.abs(parseFloat(String(tx.amount))) === amount
+  140 |             );
+  141 |             expect(debit,
+  142 |               `FR-07: Debit of $${amt} should appear in source history`
+  143 |             ).toBeDefined();
+  144 |             expect(credit,
+  145 |               `FR-07: Credit of $${amt} should appear in target history`
+  146 |             ).toBeDefined();
+  147 |           }
+  148 |         }
+  149 |         return;
+  150 |       }
+  151 | 
+  152 |       // ==================== BRANCH 2: invalidAmounts (TC-E2E-07) ====================
+  153 |       if (data.invalidAmounts) {
+  154 |         for (const invalidAmt of data.invalidAmounts) {
+  155 |           Logger.info(`${data.testCaseId}: attempting invalid amount "${invalidAmt}"`);
+  156 |           await transferPage.navigate();
+  157 |           try {
+  158 |             await transferPage.performTransfer(invalidAmt, sourceAcc, targetAcc);
+  159 |           } catch (e) {
+  160 |             // Some invalid inputs (e.g. 'abc') may cause form-level errors
+  161 |             Logger.info(
+  162 |               `${data.testCaseId}: transfer call threw (expected for invalid input): ` +
+  163 |               `${(e as Error).message}`
+  164 |             );
+  165 |           }
+  166 |           await page.waitForTimeout(1_500); // settle for any backend processing
+  167 |         }
+  168 | 
+  169 |         const postSource = await fetchBalance(request, sourceAcc);
+  170 |         const postTarget = await fetchBalance(request, targetAcc);
+  171 |         Logger.info(
+  172 |           `${data.testCaseId}: post-balance source=$${postSource} target=$${postTarget}`
+  173 |         );
+  174 | 
+  175 |         const sourceDelta = preSource - postSource;
+  176 |         const targetDelta = postTarget - preTarget;
+  177 | 
+  178 |         // Ideally balances unchanged. Defects DEF-002/003/005 cause drift.
+  179 |         expect.soft(sourceDelta,
+  180 |           `Known bugs ${data.defectId} active: Source #${sourceAcc} drifted by ` +
+  181 |           `$${sourceDelta.toFixed(2)} from invalid inputs (should be 0).`
+  182 |         ).toBeCloseTo(0, 2);
+  183 | 
+  184 |         expect.soft(targetDelta,
+  185 |           `Known bugs ${data.defectId} active: Target #${targetAcc} drifted by ` +
+  186 |           `$${targetDelta.toFixed(2)} from invalid inputs (should be 0).`
+> 187 |         ).toBeCloseTo(0, 2);
+      |           ^ Error: Known bugs DEF-002+DEF-003+DEF-005 active: Target #35988 drifted by $-50.00 from invalid inputs (should be 0).
+  188 |         return;
+  189 |       }
+  190 | 
+  191 |       // ==================== BRANCH 3: single amount (TC-E2E-01..05, 08) ====================
+  192 |       const amount = data.amount!;
+  193 |       await transferPage.navigate();
+  194 |       await transferPage.performTransfer(amount, sourceAcc, targetAcc);
+  195 | 
+  196 |       // TC-E2E-02: cross-check UI confirmation text contents
+  197 |       if (data.verifyConfirmationText && !data.isDefect) {
+  198 |         await transferPage.verifySuccess(amount, sourceAcc, targetAcc);
+  199 |         const confirmationText = await transferPage.getConfirmationText();
+  200 |         const formattedAmount = parseFloat(amount).toFixed(2);
+  201 | 
+  202 |         expect(confirmationText,
+  203 |           'FR-08: UI confirmation should contain formatted amount'
+  204 |         ).toContain(`$${formattedAmount}`);
+  205 |         expect(confirmationText,
+  206 |           'FR-08: UI confirmation should contain source account number'
+  207 |         ).toContain(sourceAcc);
+  208 |         expect(confirmationText,
+  209 |           'FR-08: UI confirmation should contain target account number'
+  210 |         ).toContain(targetAcc);
+  211 |       }
+  212 | 
+  213 |       const postSource = await fetchBalance(request, sourceAcc);
+  214 |       const postTarget = data.isSameAccount
+  215 |         ? postSource
+  216 |         : await fetchBalance(request, targetAcc);
+  217 |       Logger.info(
+  218 |         `${data.testCaseId}: post-balance source=$${postSource} target=$${postTarget}`
+  219 |       );
+  220 | 
+  221 |       if (data.isDefect) {
+  222 |         // ----- Defect scenarios — soft-assert the buggy state -----
+  223 |         if (data.isSameAccount) {
+  224 |           // DEF-001: same-account should not change balance (net is 0 but
+  225 |           // phantom Debit+Credit entries pollute history). Net balance OK.
+  226 |           expect.soft(postSource,
+  227 |             `DEF-001 documented: Same-account transfer should not change net balance`
+  228 |           ).toBeCloseTo(preSource, 2);
+  229 |         } else {
+  230 |           // DEF-004: insufficient-funds transfer was incorrectly accepted —
+  231 |           // source went negative
+  232 |           const amt = parseFloat(amount);
+  233 |           expect.soft(postSource,
+  234 |             `DEF-004 active: Insufficient-funds transfer accepted. ` +
+  235 |             `Source went from $${preSource} to $${postSource} ` +
+  236 |             `(should have remained $${preSource}).`
+  237 |           ).toBeCloseTo(preSource - amt, 2);
+  238 |         }
+  239 |       } else {
+  240 |         // ----- Happy path: exact delta + optional history check -----
+  241 |         const amt = parseFloat(amount);
+  242 |         expect(postSource,
+  243 |           `FR-06: Source debited by $${amt}`
+  244 |         ).toBeCloseTo(preSource - amt, 2);
+  245 |         expect(postTarget,
+  246 |           `FR-06: Target credited by $${amt}`
+  247 |         ).toBeCloseTo(preTarget + amt, 2);
+  248 | 
+  249 |         if (data.validateHistory) {
+  250 |           const sourceTxns = await fetchTransactions(request, sourceAcc);
+  251 |           const targetTxns = await fetchTransactions(request, targetAcc);
+  252 | 
+  253 |           const debit = sourceTxns.find(tx =>
+  254 |             tx.type === 'Debit' &&
+  255 |             Math.abs(parseFloat(String(tx.amount))) === amt
+  256 |           );
+  257 |           const credit = targetTxns.find(tx =>
+  258 |             tx.type === 'Credit' &&
+  259 |             Math.abs(parseFloat(String(tx.amount))) === amt
+  260 |           );
+  261 |           expect(debit,
+  262 |             `FR-07: Debit of $${amt} should be in source #${sourceAcc} history`
+  263 |           ).toBeDefined();
+  264 |           expect(credit,
+  265 |             `FR-07: Credit of $${amt} should be in target #${targetAcc} history`
+  266 |           ).toBeDefined();
+  267 |         }
+  268 |       }
+  269 |     });
+  270 |   }
+  271 | });
+```

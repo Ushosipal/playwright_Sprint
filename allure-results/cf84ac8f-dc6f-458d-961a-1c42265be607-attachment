@@ -1,0 +1,32 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transferUI.spec.ts >> UI Transfer Validations @ui >> TC-UI-005: Empty Amount field is rejected @regression @FR-09
+- Location: tests\ui\transferUI.spec.ts:195:7
+
+# Error details
+
+```
+Error: browserType.launch: Target page, context or browser has been closed
+Browser logs:
+
+<launching> C:\Users\Ushosi\AppData\Local\ms-playwright\webkit-2287\Playwright.exe --inspector-pipe --disable-accelerated-compositing --headless --no-startup-window
+<launched> pid=12264
+Call log:
+  - <launching> C:\Users\Ushosi\AppData\Local\ms-playwright\webkit-2287\Playwright.exe --inspector-pipe --disable-accelerated-compositing --headless --no-startup-window
+  - <launched> pid=12264
+  - [pid=12264] <gracefully close start>
+  - [pid=12264] <kill>
+  - [pid=12264] <will force kill>
+  - [pid=12264] taskkill stderr: ERROR: The process "12264" not found.
+  - [pid=12264] <process did exit: exitCode=3221225501, signal=null>
+  - [pid=12264] starting temporary directories cleanup
+  - [pid=12264] finished temporary directories cleanup
+  - [pid=12264] <gracefully close end>
+
+```

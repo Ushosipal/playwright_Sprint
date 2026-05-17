@@ -1,0 +1,1 @@
+[screenshot] Page closed before screenshot for "TC-UI-01: Successful fund transfer between own accounts @smoke @FR-05"

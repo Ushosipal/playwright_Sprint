@@ -1,0 +1,23 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: performance-lite\perf.spec.ts >> Performance Lite @perf >> TC-PERF-03: POST /transfer response < 3000 ms
+- Location: tests\performance-lite\perf.spec.ts:59:7
+
+# Error details
+
+```
+Error: page.goto: net::ERR_ABORTED at http://localhost:9090/parabank/register.htm
+Call log:
+  - navigating to "http://localhost:9090/parabank/register.htm", waiting until "load"
+
+```
+
+```
+Error: apiRequestContext._wrapApiCall: Target page, context or browser has been closed
+```

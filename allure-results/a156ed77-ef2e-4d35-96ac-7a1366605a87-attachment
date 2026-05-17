@@ -1,0 +1,227 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transfer.ui.spec.ts >> UI Transfer Validations @ui >> TC-UI-04-A: Empty amount field — should be rejected by UI @defects @FR-09
+- Location: tests\ui\transfer.ui.spec.ts:25:9
+
+# Error details
+
+```
+Error: Bug DEF-002-related appears FIXED — validation now correctly triggers an error.
+
+expect(received).toBeTruthy()
+
+Received: false
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link:
+        - /url: admin.htm
+        - img [ref=e4] [cursor=pointer]
+      - link "ParaBank":
+        - /url: index.htm
+        - img "ParaBank" [ref=e5] [cursor=pointer]
+      - paragraph [ref=e6]: Experience the difference
+    - generic [ref=e7]:
+      - list [ref=e8]:
+        - listitem [ref=e9]: Solutions
+        - listitem [ref=e10]:
+          - link "About Us" [ref=e11] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e12]:
+          - link "Services" [ref=e13] [cursor=pointer]:
+            - /url: services.htm
+        - listitem [ref=e14]:
+          - link "Products" [ref=e15] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/products.jsp
+        - listitem [ref=e16]:
+          - link "Locations" [ref=e17] [cursor=pointer]:
+            - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - listitem [ref=e18]:
+          - link "Admin Page" [ref=e19] [cursor=pointer]:
+            - /url: admin.htm
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "home" [ref=e22] [cursor=pointer]:
+            - /url: index.htm
+        - listitem [ref=e23]:
+          - link "about" [ref=e24] [cursor=pointer]:
+            - /url: about.htm
+        - listitem [ref=e25]:
+          - link "contact" [ref=e26] [cursor=pointer]:
+            - /url: contact.htm
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: Welcome Sudip Chel
+        - heading "Account Services" [level=2] [ref=e30]
+        - list [ref=e31]:
+          - listitem [ref=e32]:
+            - link "Open New Account" [ref=e33] [cursor=pointer]:
+              - /url: openaccount.htm
+          - listitem [ref=e34]:
+            - link "Accounts Overview" [ref=e35] [cursor=pointer]:
+              - /url: overview.htm
+          - listitem [ref=e36]:
+            - link "Transfer Funds" [ref=e37] [cursor=pointer]:
+              - /url: transfer.htm
+          - listitem [ref=e38]:
+            - link "Bill Pay" [ref=e39] [cursor=pointer]:
+              - /url: billpay.htm
+          - listitem [ref=e40]:
+            - link "Find Transactions" [ref=e41] [cursor=pointer]:
+              - /url: findtrans.htm
+          - listitem [ref=e42]:
+            - link "Update Contact Info" [ref=e43] [cursor=pointer]:
+              - /url: updateprofile.htm
+          - listitem [ref=e44]:
+            - link "Request Loan" [ref=e45] [cursor=pointer]:
+              - /url: requestloan.htm
+          - listitem [ref=e46]:
+            - link "Log Out" [ref=e47] [cursor=pointer]:
+              - /url: logout.htm
+      - generic [ref=e50]:
+        - heading "Error!" [level=1] [ref=e51]
+        - paragraph [ref=e52]: An internal error has occurred and has been logged.
+  - generic [ref=e54]:
+    - list [ref=e55]:
+      - listitem [ref=e56]:
+        - link "Home" [ref=e57] [cursor=pointer]:
+          - /url: index.htm
+        - text: "|"
+      - listitem [ref=e58]:
+        - link "About Us" [ref=e59] [cursor=pointer]:
+          - /url: about.htm
+        - text: "|"
+      - listitem [ref=e60]:
+        - link "Services" [ref=e61] [cursor=pointer]:
+          - /url: services.htm
+        - text: "|"
+      - listitem [ref=e62]:
+        - link "Products" [ref=e63] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/products.jsp
+        - text: "|"
+      - listitem [ref=e64]:
+        - link "Locations" [ref=e65] [cursor=pointer]:
+          - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - text: "|"
+      - listitem [ref=e66]:
+        - link "Forum" [ref=e67] [cursor=pointer]:
+          - /url: http://forums.parasoft.com/
+        - text: "|"
+      - listitem [ref=e68]:
+        - link "Site Map" [ref=e69] [cursor=pointer]:
+          - /url: sitemap.htm
+        - text: "|"
+      - listitem [ref=e70]:
+        - link "Contact Us" [ref=e71] [cursor=pointer]:
+          - /url: contact.htm
+    - paragraph [ref=e72]: © Parasoft. All rights reserved.
+    - list [ref=e73]:
+      - listitem [ref=e74]: "Visit us at:"
+      - listitem [ref=e75]:
+        - link "www.parasoft.com" [ref=e76] [cursor=pointer]:
+          - /url: http://www.parasoft.com/
+```
+
+# Test source
+
+```ts
+  1  | /**
+  2  |  * UI Test Suite — TC-UI-01..07
+  3  |  *
+  4  |  * Covers FR-05 (transfer funds via UI), FR-08 (confirmation messages),
+  5  |  * and FR-09 (negative scenarios).
+  6  |  *
+  7  |  * TC-UI-08 (rapid-click) is intentionally NOT here — it's in
+  8  |  * tests/ui/transfer_rapid_click.spec.ts because it requires API balance
+  9  |  * verification and a special click pattern.
+  10 |  *
+  11 |  * Defect handling pattern:
+  12 |  *   - isDefect=false → assert formal success via verifySuccess()
+  13 |  *   - isDefect=true  → expect.soft() the buggy behavior (success page
+  14 |  *                      appearing for invalid input), so pipeline stays
+  15 |  *                      green while documenting the active defect.
+  16 |  */
+  17 | import { test, expect } from '../../fixtures/base-fixture';
+  18 | import uiData from '../../test-data/ui-transfer.data.json';
+  19 | import { TransferLocators } from '../../locators/transfer.locator';
+  20 | import { Logger } from '../../utils/logger';
+  21 | 
+  22 | test.describe('UI Transfer Validations @ui', () => {
+  23 | 
+  24 |   for (const data of uiData) {
+  25 |     test(`${data.testCaseId}: ${data.scenario} ${data.tags.join(' ')}`,
+  26 |       async ({ transferPage, activeUser, page }) => {
+  27 | 
+  28 |       // FR annotations from tags
+  29 |       test.info().annotations.push({ type: 'Test Type', description: 'UI' });
+  30 |       data.tags
+  31 |         .filter(t => t.startsWith('@FR-'))
+  32 |         .forEach(fr => test.info().annotations.push({
+  33 |           type: 'Requirement',
+  34 |           description: fr.substring(1)
+  35 |         }));
+  36 | 
+  37 |       // Setup
+  38 |       await transferPage.navigate();
+  39 |       const sourceAcc = activeUser.account1;
+  40 |       const targetAcc = data.isSameAccount ? activeUser.account1 : activeUser.account2;
+  41 | 
+  42 |       // Execute
+  43 |       await transferPage.performTransfer(data.amount, sourceAcc, targetAcc);
+  44 | 
+  45 |       // ---------- Defect path ----------
+  46 |       if (data.isDefect) {
+  47 |         test.info().annotations.push({
+  48 |           type: 'Known Bug',
+  49 |           description: data.defectId!
+  50 |         });
+  51 |         Logger.info(`${data.testCaseId}: defect path — soft assertions only`);
+  52 | 
+  53 |         // Did ParaBank accept the invalid input? (bug active) or reject? (fixed)
+  54 |         let bugActive = false;
+  55 |         try {
+  56 |           await page.locator(TransferLocators.successMessageBody)
+  57 |             .waitFor({ state: 'visible', timeout: 5000 });
+  58 |           bugActive = true;
+  59 |         } catch {
+  60 |           bugActive = false;
+  61 |         }
+  62 | 
+  63 |         if (bugActive) {
+  64 |           // Bug present — buggy behavior asserted (success for invalid input)
+  65 |           expect.soft(bugActive,
+  66 |             `Known bug ${data.defectId} active: UI accepted invalid input "${data.amount}" ` +
+  67 |             `and displayed success page.`
+  68 |           ).toBeTruthy();
+  69 |         } else {
+  70 |           // ParaBank correctly rejected — verify error UI is shown
+  71 |           const errorVisible = await page
+  72 |             .locator(TransferLocators.errorMessage)
+  73 |             .first()
+  74 |             .isVisible()
+  75 |             .catch(() => false);
+  76 |           expect.soft(errorVisible,
+  77 |             `Bug ${data.defectId} appears FIXED — validation now correctly triggers an error.`
+> 78 |           ).toBeTruthy();
+     |             ^ Error: Bug DEF-002-related appears FIXED — validation now correctly triggers an error.
+  79 |         }
+  80 |         return;
+  81 |       }
+  82 | 
+  83 |       // ---------- Happy path ----------
+  84 |       await transferPage.verifySuccess(data.amount, sourceAcc, targetAcc);
+  85 |     });
+  86 |   }
+  87 | });
+```

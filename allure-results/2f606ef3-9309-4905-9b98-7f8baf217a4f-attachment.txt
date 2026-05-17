@@ -1,0 +1,1 @@
+[screenshot] Page closed before screenshot for "TC-PERF-03: POST /transfer response < 3000 ms"

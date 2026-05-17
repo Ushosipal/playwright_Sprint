@@ -1,34 +1,111 @@
 pipeline {
     agent any
 
+    options {
+        timeout(time: 45, unit: 'MINUTES')
+        timestamps()
+        ansiColor('xterm')
+        buildDiscarder(logRotator(numToKeepStr: '20', daysToKeepStr: '14'))
+        disableConcurrentBuilds()
+    }
+
+    environment {
+        CI = 'true'
+        NODE_OPTIONS = '--max-old-space-size=4096'
+    }
+
     stages {
-        stage('Install Dependencies') {
+        stage('Checkout') {
             steps {
-                bat 'npm install'
+                checkout scm
+                sh 'git log -1 --pretty=format:"%h %an %s"'
             }
         }
 
-        stage('Run Tests') {
+        stage('Setup') {
             steps {
-                bat 'npx playwright test --workers=1'
+                sh '''
+                    set -euxo pipefail
+                    node --version
+                    npm --version
+                    npm ci
+                    npx playwright install --with-deps chromium
+                '''
+            }
+        }
+
+        stage('Type Check') {
+            steps {
+                sh 'npm run type-check'
+            }
+        }
+
+        stage('UI Tests') {
+            steps {
+                sh 'npx playwright test tests/ui --workers=1'
+            }
+        }
+
+        stage('API Tests') {
+            steps {
+                sh 'npx playwright test tests/api --workers=1'
+            }
+        }
+
+        stage('E2E Hybrid') {
+            steps {
+                sh 'npx playwright test tests/e2e --workers=1'
+            }
+        }
+
+        stage('Performance Lite') {
+            steps {
+                sh 'npx playwright test tests/performance --workers=1'
+            }
+        }
+
+        stage('Generate Allure Report') {
+            steps {
+                sh 'npm run report:allure:generate'
             }
         }
     }
 
     post {
         always {
-            archiveArtifacts artifacts: 'test-results/**/*', allowEmptyArchive: true
-            archiveArtifacts artifacts: 'playwright-report/**/*', allowEmptyArchive: true
-            archiveArtifacts artifacts: 'allure-results/**/*', allowEmptyArchive: true
-
-            publishHTML([
+            publishHTML(target: [
                 allowMissing: true,
                 alwaysLinkToLastBuild: true,
                 keepAll: true,
-                reportDir: 'playwright-report',
+                reportDir: 'test-results/html-report',
                 reportFiles: 'index.html',
                 reportName: 'Playwright HTML Report'
             ])
+
+            script {
+                try {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        results: [[path: 'test-results/allure-results']]
+                    ])
+                } catch (err) {
+                    echo "Allure plugin not available — falling back to archived raw results. (${err.message})"
+                }
+            }
+
+            archiveArtifacts(
+                artifacts: 'test-results/**/*',
+                allowEmptyArchive: true,
+                fingerprint: true
+            )
+
+            junit(
+                testResults: 'test-results/junit.xml',
+                allowEmptyResults: true,
+                skipPublishingChecks: true
+            )
         }
     }
 }
+

@@ -1,0 +1,20 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transfer.ui.spec.ts >> UI Transfer Validations @ui >> TC-UI-004: Transfer amount exceeds available balance - insufficient funds (DEF-FT-001) @defects @FR-09
+- Location: tests\ui\transfer.ui.spec.ts:126:7
+
+# Error details
+
+```
+Test timeout of 60000ms exceeded while setting up "page".
+```
+
+```
+Error: browserContext.newPage: Test timeout of 60000ms exceeded.
+```

@@ -1,0 +1,32 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transferUI.spec.ts >> UI Transfer Validations @ui >> TC-UI-004: Transfer amount exceeds available balance - insufficient funds (DEF-FT-001) @defects @FR-09
+- Location: tests\ui\transferUI.spec.ts:126:7
+
+# Error details
+
+```
+Error: browserType.launch: Target page, context or browser has been closed
+Browser logs:
+
+<launching> C:\Users\Ushosi\AppData\Local\ms-playwright\webkit-2287\Playwright.exe --inspector-pipe --disable-accelerated-compositing --headless --no-startup-window
+<launched> pid=23476
+Call log:
+  - <launching> C:\Users\Ushosi\AppData\Local\ms-playwright\webkit-2287\Playwright.exe --inspector-pipe --disable-accelerated-compositing --headless --no-startup-window
+  - <launched> pid=23476
+  - [pid=23476] <gracefully close start>
+  - [pid=23476] <kill>
+  - [pid=23476] <will force kill>
+  - [pid=23476] taskkill stderr: ERROR: The process "23476" not found.
+  - [pid=23476] <process did exit: exitCode=3221225501, signal=null>
+  - [pid=23476] starting temporary directories cleanup
+  - [pid=23476] finished temporary directories cleanup
+  - [pid=23476] <gracefully close end>
+
+```

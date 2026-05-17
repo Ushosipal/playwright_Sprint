@@ -1,0 +1,18 @@
+2026-05-16 15:10:43 [info]: Fixture: staggered start delay = 956 ms
+2026-05-16 15:10:44 [info]: Fixture: starting UI registration for username=qauser_1778924444709
+2026-05-16 15:10:44 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 15:10:45 [info]: RegisterPage: Submitting registration for username=qauser_1778924444709
+2026-05-16 15:10:46 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 15:10:46 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 15:10:48 [info]: AccountOverviewPage: Primary account captured: #17007
+2026-05-16 15:10:48 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 15:10:48 [info]: OpenAccountPage: Opening Savings account funded from #17007
+2026-05-16 15:10:49 [info]: OpenAccountPage: New account created: #17118
+2026-05-16 15:10:49 [info]: Fixture COMPLETE: user=qauser_1778924444709 account1=17007 account2=17118
+2026-05-16 15:10:49 [info]: TC-UI-08: pre-balance source=$415.5 target=$100
+2026-05-16 15:10:49 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-16 15:10:50 [info]: TransferFundsPage: Firing 4 rapid clicks on Transfer button
+2026-05-16 15:10:50 [info]: TC-UI-08: 4 rapid clicks fired
+2026-05-16 15:10:53 [info]: TC-UI-08: post-balance source=$315.5 target=$200
+2026-05-16 15:10:53 [info]: TC-UI-08: source delta=$100.00 (~4 debits)
+2026-05-16 15:10:53 [warn]: TC-UI-08 summary: 3 soft assertion(s) failed — DEF-006 confirmed active (4 duplicate transfers processed).

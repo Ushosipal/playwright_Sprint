@@ -1,0 +1,16 @@
+2026-05-16 20:07:51 [info]: Fixture: staggered start delay = 529 ms
+2026-05-16 20:07:51 [info]: Fixture: starting UI registration for username=qauser_1778942271787
+2026-05-16 20:07:51 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 20:07:51 [info]: RegisterPage: Submitting registration for username=qauser_1778942271787
+2026-05-16 20:07:52 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 20:07:52 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 20:07:52 [info]: AccountOverviewPage: Primary account captured: #24111
+2026-05-16 20:07:52 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 20:07:52 [info]: OpenAccountPage: Opening Savings account funded from #24111
+2026-05-16 20:07:52 [info]: OpenAccountPage: New account created: #24222
+2026-05-16 20:07:52 [info]: Fixture COMPLETE: user=qauser_1778942271787 account1=24111 account2=24222
+2026-05-16 20:07:52 [info]: TC-API-002: Verifying POST /transfer returns HTTP 200 with success body for valid request
+2026-05-16 20:07:52 [info]: TC-API-002: Arrange complete — amount=100, from=#24111, to=#24222
+2026-05-16 20:07:52 [info]: TC-API-002: POST /transfer returned HTTP 200
+2026-05-16 20:07:52 [info]: TC-API-002: Response body = "Successfully transferred $100 from account #24111 to account #24222"
+2026-05-16 20:07:52 [info]: TC-API-002: PASSED — POST /transfer returned HTTP 200 with valid success body

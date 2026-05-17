@@ -1,0 +1,28 @@
+2026-05-17 00:56:29 [info]: Fixture: staggered start delay = 1792 ms
+2026-05-17 00:56:31 [info]: Fixture: starting UI registration for username=qauser_1778959591354
+2026-05-17 00:56:31 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-17 00:56:31 [info]: RegisterPage: Submitting registration for username=qauser_1778959591354
+2026-05-17 00:56:32 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-17 00:56:32 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-17 00:56:32 [info]: AccountOverviewPage: Primary account captured: #138885
+2026-05-17 00:56:32 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-17 00:56:32 [info]: OpenAccountPage: Opening Savings account funded from #138885
+2026-05-17 00:56:32 [info]: OpenAccountPage: New account created: #138996
+2026-05-17 00:56:32 [info]: Fixture COMPLETE: user=qauser_1778959591354 account1=138885 account2=138996
+2026-05-17 00:56:32 [info]: TC-E2E-001: Executing hybrid test — UI transfer with API balance delta verification
+2026-05-17 00:56:32 [info]: TC-E2E-001: Arrange complete — amount=100, from=#138885, to=#138996
+2026-05-17 00:56:32 [info]: TC-E2E-001: Pre-transfer source balance = $415.5
+2026-05-17 00:56:32 [info]: TC-E2E-001: Pre-transfer destination balance = $100
+2026-05-17 00:56:32 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-17 00:56:32 [info]: TC-E2E-001: Navigated to Transfer Funds page
+2026-05-17 00:56:32 [info]: TransferFundsPage: Transferring $100: #138885 -> #138996
+2026-05-17 00:56:32 [info]: TC-E2E-001: Transfer submitted via UI
+2026-05-17 00:56:33 [info]: TC-E2E-001: UI confirmation page verified — "Transfer Complete!" displayed
+2026-05-17 00:56:33 [info]: TC-E2E-001: Polling API for updated post-transfer source balance...
+2026-05-17 00:56:33 [info]: TC-E2E-001: Polling API for updated post-transfer destination balance...
+2026-05-17 00:56:33 [info]: TC-E2E-001: Balance deltas verified — source delta=-$100, dest delta=+$100
+2026-05-17 00:56:33 [info]: TC-E2E-001: Polling API for source debit transaction history entry...
+2026-05-17 00:56:33 [info]: TC-E2E-001: Debit transaction of $100 found in source history
+2026-05-17 00:56:33 [info]: TC-E2E-001: Polling API for destination credit transaction history entry...
+2026-05-17 00:56:33 [info]: TC-E2E-001: Credit transaction of $100 found in destination history
+2026-05-17 00:56:33 [info]: TC-E2E-001: PASSED - UI transfer confirmed, API balance deltas verified, transaction history entries validated

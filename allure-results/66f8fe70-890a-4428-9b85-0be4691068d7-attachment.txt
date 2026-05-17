@@ -1,0 +1,21 @@
+2026-05-16 19:40:42 [info]: Fixture: staggered start delay = 615 ms
+2026-05-16 19:40:43 [info]: Fixture: Registration attempt 1/3 — username="qa_4_1778940643080_0_12901", ssn="SSN-940723597", worker=4
+2026-05-16 19:40:43 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 19:40:43 [info]: Fixture: Registration form loaded, attempting username="qa_4_1778940643080_0_12901"
+2026-05-16 19:40:43 [info]: RegisterPage: Submitting registration for username=qa_4_1778940643080_0_12901
+2026-05-16 19:40:44 [warn]: Fixture: Registration FAILED for username="qa_4_1778940643080_0_12901" — "This username already exists."
+2026-05-16 19:40:44 [warn]: Fixture: Attempt 1 failed — reason: "This username already exists.". Retrying with a new username...
+2026-05-16 19:40:44 [info]: Fixture: Waiting 2183ms before retry...
+2026-05-16 19:40:46 [info]: Fixture: Registration attempt 2/3 — username="qa_4_1778940646960_1_27469", ssn="SSN-940725236", worker=4
+2026-05-16 19:40:46 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 19:40:47 [info]: Fixture: Registration form loaded, attempting username="qa_4_1778940646960_1_27469"
+2026-05-16 19:40:47 [info]: RegisterPage: Submitting registration for username=qa_4_1778940646960_1_27469
+2026-05-16 19:40:47 [warn]: Fixture: Registration FAILED for username="qa_4_1778940646960_1_27469" — "This username already exists."
+2026-05-16 19:40:47 [warn]: Fixture: Attempt 2 failed — reason: "This username already exists.". Retrying with a new username...
+2026-05-16 19:40:47 [info]: Fixture: Waiting 1337ms before retry...
+2026-05-16 19:40:49 [info]: Fixture: Registration attempt 3/3 — username="qa_4_1778940649095_2_43479", ssn="SSN-940659959", worker=4
+2026-05-16 19:40:49 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 19:40:49 [info]: Fixture: Registration form loaded, attempting username="qa_4_1778940649095_2_43479"
+2026-05-16 19:40:49 [info]: RegisterPage: Submitting registration for username=qa_4_1778940649095_2_43479
+2026-05-16 19:40:49 [warn]: Fixture: Registration FAILED for username="qa_4_1778940649095_2_43479" — "This username already exists."
+2026-05-16 19:40:49 [warn]: Fixture: Attempt 3 failed — reason: "This username already exists.". No retries remaining.

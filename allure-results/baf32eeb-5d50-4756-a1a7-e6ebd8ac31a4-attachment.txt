@@ -1,0 +1,17 @@
+2026-05-17 14:08:38 [info]: Fixture: staggered start delay = 996 ms
+2026-05-17 14:08:39 [info]: Fixture: starting UI registration for username=qauser_1779007119184
+2026-05-17 14:08:39 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-17 14:08:43 [info]: RegisterPage: Submitting registration for username=qauser_1779007119184
+2026-05-17 14:08:45 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-17 14:08:45 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-17 14:08:47 [info]: AccountOverviewPage: Primary account captured: #184506
+2026-05-17 14:08:47 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-17 14:08:48 [info]: OpenAccountPage: Opening Savings account funded from #184506
+2026-05-17 14:08:50 [info]: OpenAccountPage: New account created: #184839
+2026-05-17 14:08:50 [info]: Fixture COMPLETE: user=qauser_1779007119184 account1=184506 account2=184839
+2026-05-17 14:08:50 [info]: TC-API-003: Verifying destination account is credited correctly after API transfer
+2026-05-17 14:08:50 [info]: TC-API-003: Arrange complete — amount=100, from=#184506, to=#184839
+2026-05-17 14:08:52 [info]: TC-API-003: Pre-transfer destination balance = $100
+2026-05-17 14:08:52 [info]: TC-API-003: POST /transfer returned HTTP 200
+2026-05-17 14:08:52 [info]: TC-API-003: Post-transfer destination balance = $200
+2026-05-17 14:08:52 [info]: TC-API-003: PASSED — Destination credited correctly: $100 → $200 (delta = +$100)

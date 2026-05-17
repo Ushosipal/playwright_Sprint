@@ -1,0 +1,20 @@
+2026-05-17 00:24:40 [info]: Fixture: staggered start delay = 2260 ms
+2026-05-17 00:24:42 [info]: Fixture: starting UI registration for username=qauser_1778957682747
+2026-05-17 00:24:42 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-17 00:24:43 [info]: RegisterPage: Submitting registration for username=qauser_1778957682747
+2026-05-17 00:24:46 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-17 00:24:46 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-17 00:24:47 [info]: AccountOverviewPage: Primary account captured: #103920
+2026-05-17 00:24:47 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-17 00:24:48 [info]: OpenAccountPage: Opening Savings account funded from #103920
+2026-05-17 00:24:48 [info]: OpenAccountPage: New account created: #104142
+2026-05-17 00:24:48 [info]: Fixture COMPLETE: user=qauser_1778957682747 account1=103920 account2=104142
+2026-05-17 00:24:48 [info]: TC-UI-006: Executing same-account transfer (from=to) — expecting rejection but known defect DEF-FT-004
+2026-05-17 00:24:48 [info]: TC-UI-006: Arrange complete — amount=50, from=#103920, to=#103920 (SAME account)
+2026-05-17 00:24:48 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-17 00:24:49 [info]: TC-UI-006: Navigated to Transfer Funds page
+2026-05-17 00:24:49 [info]: TransferFundsPage: Transferring $50: #103920 -> #103920
+2026-05-17 00:24:49 [info]: TC-UI-006: Same-account transfer submitted via UI (from=to)
+2026-05-17 00:24:49 [info]: TC-UI-006: Success message appeared — bug DEF-FT-004 is ACTIVE
+2026-05-17 00:24:49 [info]: TC-UI-006: Soft assertion logged — DEF-FT-004 confirmed ACTIVE, phantom transactions created
+2026-05-17 00:24:49 [info]: TC-UI-006: COMPLETED — Same-account defect path finished, bug active: true

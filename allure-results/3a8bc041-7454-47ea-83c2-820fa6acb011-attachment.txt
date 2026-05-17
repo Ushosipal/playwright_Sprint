@@ -1,0 +1,20 @@
+2026-05-17 01:01:00 [info]: Fixture: staggered start delay = 1742 ms
+2026-05-17 01:01:02 [info]: Fixture: starting UI registration for username=qauser_1778959862145
+2026-05-17 01:01:02 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-17 01:01:02 [info]: RegisterPage: Submitting registration for username=qauser_1778959862145
+2026-05-17 01:01:04 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-17 01:01:04 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-17 01:01:05 [info]: AccountOverviewPage: Primary account captured: #147987
+2026-05-17 01:01:05 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-17 01:01:05 [info]: OpenAccountPage: Opening Savings account funded from #147987
+2026-05-17 01:01:06 [info]: OpenAccountPage: New account created: #148098
+2026-05-17 01:01:06 [info]: Fixture COMPLETE: user=qauser_1778959862145 account1=147987 account2=148098
+2026-05-17 01:01:06 [info]: TC-UI-005: Executing transfer with empty amount field — expecting validation rejection
+2026-05-17 01:01:06 [info]: TC-UI-005: Arrange complete — amount="" (empty), from=#147987, to=#148098
+2026-05-17 01:01:06 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-17 01:01:06 [info]: TC-UI-005: Navigated to Transfer Funds page
+2026-05-17 01:01:06 [info]: TransferFundsPage: Transferring $: #147987 -> #148098
+2026-05-17 01:01:07 [info]: TC-UI-005: Transfer with empty amount submitted via UI
+2026-05-17 01:01:12 [info]: TC-UI-005: Success message did NOT appear — correct behavior
+2026-05-17 01:01:12 [info]: TC-UI-005: Form correctly rejected empty amount. Error message visible: true
+2026-05-17 01:01:12 [info]: TC-UI-005: COMPLETED — Empty amount validation verified

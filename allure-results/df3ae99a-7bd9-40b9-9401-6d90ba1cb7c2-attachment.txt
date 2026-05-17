@@ -1,0 +1,6 @@
+[screenshot] Capture failed for "TC-UI-001: Successful fund transfer between own accounts @smoke @FR-05 @FR-08": page.screenshot: Target page, context or browser has been closed
+Call log:
+  - taking page screenshot
+  - waiting for fonts to load...
+  - fonts loaded
+

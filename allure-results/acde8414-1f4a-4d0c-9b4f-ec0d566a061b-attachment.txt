@@ -1,0 +1,1 @@
+[screenshot] Page closed before screenshot for "TC-UI-02: Confirmation message displays formatted amount and account numbers @smoke @FR-08"

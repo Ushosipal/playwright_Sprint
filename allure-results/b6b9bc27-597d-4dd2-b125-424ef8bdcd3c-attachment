@@ -1,0 +1,25 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui\transferUI.spec.ts >> UI Transfer Validations @ui >> TC-UI-001: Successful fund transfer between own accounts @smoke @FR-05 @FR-08
+- Location: tests\ui\transferUI.spec.ts:19:7
+
+# Error details
+
+```
+Error: browserContext.close: Test ended.
+Browser logs:
+
+<launching> C:\Users\Ushosi\AppData\Local\ms-playwright\firefox-1522\firefox\firefox.exe -no-remote -headless -profile C:\Users\Ushosi\AppData\Local\Temp\playwright_firefoxdev_profile-8uButK -juggler-pipe -silent
+<launched> pid=28388
+[pid=28388][err] *** You are running in headless mode.
+[pid=28388][err] JavaScript warning: resource://services-settings/Utils.sys.mjs, line 119: unreachable code after return statement
+[pid=28388][out] 
+[pid=28388][out] Juggler listening to the pipe
+[pid=28388][out] Crash Annotation GraphicsCriticalError: |[0][GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt (t=0.936823) [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+```

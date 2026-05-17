@@ -1,0 +1,20 @@
+2026-05-16 22:13:49 [info]: Fixture: staggered start delay = 2243 ms
+2026-05-16 22:13:51 [info]: Fixture: starting UI registration for username=qauser_1778949831718
+2026-05-16 22:13:51 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 22:13:51 [info]: RegisterPage: Submitting registration for username=qauser_1778949831718
+2026-05-16 22:13:55 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 22:13:55 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 22:13:55 [info]: AccountOverviewPage: Primary account captured: #70731
+2026-05-16 22:13:55 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 22:13:55 [info]: OpenAccountPage: Opening Savings account funded from #70731
+2026-05-16 22:13:56 [info]: OpenAccountPage: New account created: #71064
+2026-05-16 22:13:56 [info]: Fixture COMPLETE: user=qauser_1778949831718 account1=70731 account2=71064
+2026-05-16 22:13:56 [info]: TC-UI-004: Executing insufficient-funds transfer — expecting rejection but known defect DEF-FT-001
+2026-05-16 22:13:56 [info]: TC-UI-004: Arrange complete — overdraft amount=999999, from=#70731, to=#71064
+2026-05-16 22:13:56 [info]: TransferFundsPage: Navigating to /parabank/transfer.htm
+2026-05-16 22:13:57 [info]: TC-UI-004: Navigated to Transfer Funds page
+2026-05-16 22:13:57 [info]: TransferFundsPage: Transferring $999999: #70731 -> #71064
+2026-05-16 22:13:58 [info]: TC-UI-004: Overdraft transfer submitted via UI
+2026-05-16 22:13:58 [info]: TC-UI-004: Success message appeared — bug DEF-FT-001 is ACTIVE
+2026-05-16 22:13:58 [info]: TC-UI-004: Soft assertion logged — DEF-FT-001 confirmed ACTIVE, overdraft was processed
+2026-05-16 22:13:58 [info]: TC-UI-004: COMPLETED — Defect path finished, bug active: true

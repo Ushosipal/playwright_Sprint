@@ -1,0 +1,12 @@
+2026-05-16 21:21:45 [info]: Fixture: staggered start delay = 581 ms
+2026-05-16 21:21:46 [info]: Fixture: starting UI registration for username=qauser_1778946706089
+2026-05-16 21:21:46 [info]: RegisterPage: Navigating to /parabank/register.htm
+2026-05-16 21:21:46 [info]: RegisterPage: Submitting registration for username=qauser_1778946706089
+2026-05-16 21:21:46 [info]: RegisterPage: Registration successful (Welcome page detected)
+2026-05-16 21:21:46 [info]: AccountOverviewPage: Clicking "Accounts Overview" nav link
+2026-05-16 21:21:46 [info]: AccountOverviewPage: Primary account captured: #30771
+2026-05-16 21:21:46 [info]: OpenAccountPage: Navigating to /parabank/openaccount.htm
+2026-05-16 21:21:47 [info]: OpenAccountPage: Opening Savings account funded from #30771
+2026-05-16 21:21:47 [info]: OpenAccountPage: New account created: #30882
+2026-05-16 21:21:47 [info]: Fixture COMPLETE: user=qauser_1778946706089 account1=30771 account2=30882
+2026-05-16 21:21:47 [info]: TC-UI-004: Executing insufficient-funds transfer — expecting rejection but known defect DEF-FT-001
