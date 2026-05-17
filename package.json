@@ -2,7 +2,15 @@
   "name": "parabank-capstone",
   "version": "1.0.0",
   "description": "Enterprise-grade Playwright framework for ParaBank fund-transfer validation (Capstone)",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test tests/ui",
+    "test:api": "playwright test tests/api",
+    "test:e2e": "playwright test tests/e2e",
+    "test:perf": "playwright test tests/performance",
+    "type-check": "tsc --noEmit",
+    "report:allure:generate": "allure generate test-results/allure-results --clean -o test-results/allure-report"
+  },
   "devDependencies": {
     "@playwright/test": "^1.45.0",
     "@types/node": "^20.10.0",
